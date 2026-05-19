@@ -15,13 +15,13 @@ public class Dog extends Actor
     public void act()
     {
         // Add your action code here.
-        if(Greenfoot.isKeyDown("left"))
+        if(Greenfoot.isKeyDown("up"))
         {
-            move(-2);
-        }
-        else if(Greenfoot.isKeyDown("right"))
-        {
-            move(2);
+            setLocation(getX(), getY()-3);
+            setRotation(90);
+            setLocation(getX(), getY()-2);
+            
+            //move(-2);
         }
     }
 }
