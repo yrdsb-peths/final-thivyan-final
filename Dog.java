@@ -12,16 +12,47 @@ public class Dog extends Actor
      * Act - do whatever the Dog wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
+    private int vSpeed = 5;
+    private int acceleration = 2;
+    
     public void act()
     {
         // Add your action code here.
-        if(Greenfoot.isKeyDown("up"))
+        fall();
+        if(Greenfoot.isKeyDown("space"))
         {
-            setLocation(getX(), getY()-3);
-            setRotation(90);
-            setLocation(getX(), getY()-2);
-            
-            //move(-2);
+            //jump();
+            //fall();
         }
+    }
+    
+    public void checkFall()
+    {
+        if (onGround()) 
+        {
+            vSpeed = 0;
+        }
+        else
+        {
+            fall();
+        }
+    }
+    
+    public boolean onGround()
+    {
+        Actor under = getOneObjectAtOffset(0, getHeight()/ 2, Obstacle.class);
+        return under != null;
+    }
+    
+    public void fall()
+    {
+        setLocation(getX(), getY() + vSpeed);
+        vSpeed = vSpeed + acceleration;
+    }
+    
+    public void jump()
+    {
+        setLocation(getX(), getY() - vSpeed);
     }
 }
