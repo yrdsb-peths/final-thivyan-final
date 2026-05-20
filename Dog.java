@@ -19,12 +19,13 @@ public class Dog extends Actor
     public void act()
     {
         // Add your action code here.
-        fall();
+        
         if(Greenfoot.isKeyDown("space"))
         {
-            //jump();
-            //fall();
+            jump();
+            fall();
         }
+        checkFall();
     }
     
     public void checkFall()
@@ -41,7 +42,7 @@ public class Dog extends Actor
     
     public boolean onGround()
     {
-        Actor under = getOneObjectAtOffset(0, getHeight()/ 2, Obstacle.class);
+        Actor under = getOneObjectAtOffset(0, getImage().getHeight()/ 2, Obstacle.class);
         return under != null;
     }
     
@@ -53,6 +54,7 @@ public class Dog extends Actor
     
     public void jump()
     {
-        setLocation(getX(), getY() - vSpeed);
+        vSpeed = -9;
+        fall();
     }
 }
