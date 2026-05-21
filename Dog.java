@@ -15,6 +15,7 @@ public class Dog extends Actor
     
     private int vSpeed = 5;
     private int acceleration = 2;
+    private int jumpStrength = 9;
     
     public void act()
     {
@@ -54,7 +55,7 @@ public class Dog extends Actor
     
     public void jump()
     {
-        vSpeed = -9;
+        vSpeed = -jumpStrength;
         fall();
     }
 }
