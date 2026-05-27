@@ -56,19 +56,19 @@ private SpriteBatch batch;
 
 
         // LOAD SPRITE SHEET
-        sheet = new Texture("Sprites/Pokemon/Rayquaza/RayquazaFront.png");
+        sheet = new Texture("Pokemon/Sprites/reshiram/reshiramBack.png");
 
 
         // CUT THE SHEET INTO FRAMES
         TextureRegion[][] temp =
-            TextureRegion.split(sheet, 110, 97);
+            TextureRegion.split(sheet, 100, 89);
 
-// venusaur 86x71, rayquaza 101x106 front: 110, 97
+// venusaur 86x71, rayquaza 101x106 front: 110, 97, 100 x 89 reshiram back 108 x 83 front
         // STORE FRAMES
         Array<TextureRegion> frames = new Array<>();
 
 
-        int frameCount = 45;
+        int frameCount = 225;
 
 
         for (int row = 0; row < temp.length; row++) {
