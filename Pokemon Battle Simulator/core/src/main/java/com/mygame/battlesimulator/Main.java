@@ -56,14 +56,14 @@ private SpriteBatch batch;
 
 
         // LOAD SPRITE SHEET
-        sheet = new Texture("Sprites/Pokemon/Rayquaza.png");
+        sheet = new Texture("Sprites/Pokemon/Rayquaza/RayquazaFront.png");
 
 
         // CUT THE SHEET INTO FRAMES
         TextureRegion[][] temp =
-            TextureRegion.split(sheet, 101, 106);
+            TextureRegion.split(sheet, 110, 97);
 
-// venusaur 86x71, rayquaza 101x106
+// venusaur 86x71, rayquaza 101x106 front: 110, 97
         // STORE FRAMES
         Array<TextureRegion> frames = new Array<>();
 
