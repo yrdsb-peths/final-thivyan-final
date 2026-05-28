@@ -19,7 +19,7 @@ public class Pokemon {
     private int backFrames;
 
 
-    public void constructor(name, health, attack, defense, specialAttack, specialDefense, speed, type1, type2, userSprite, opponentSprite, moves, width, height, frontFrames, backFrames)
+    public Pokemon(String name, int health, int attack, int defense, int specialAttack, int specialDefense, int speed, String type1, String type2, String userSprite, String opponentSprite, String moves, int width, int height, int frontFrames, int backFrames)
     {
         this.name = name;
         this.health = health;
@@ -38,6 +38,6 @@ public class Pokemon {
         this.frontFrames = frontFrames;
         this.backFrames = backFrames;
     }
-    
+
 
 }
