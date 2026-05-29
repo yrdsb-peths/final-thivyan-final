@@ -46,27 +46,31 @@ public class Pokemon {
     public Pokemon(JsonValue data)
     {
         this.name = data.getString("name");
+        
+        this.health = data.get("stats").getInt("hp");
+        this.attack = data.get("stats").getInt("attack");
+        this.defense = data.get("stats").getInt("defense");
+        this.specialAttack = data.get("stats").getInt("specialAttack");
+        this.specialDefense = data.get("stats").getInt("specialDefense");
+        this.speed = data.get("stats").getInt("speed");;
+        this.type1 = data.get("stats").getString("type1");
+        this.type2 = data.get("stats").getString("type2");
 
-        JsonValue stats = data.get("stats");
-        this.health = data.getInt("hp");
-        this.attack = data.getInt("attack");
-        this.defense = data.getInt("defense");
-        this.specialAttack = data.getInt("specialAttack");
-        this.specialDefense = data.getInt("specialDefense");
-        this.speed = data.getInt("speed");;
-        this.type1 = data.getString("type1");
-        this.type2 = data.getString("type2");
+        //JsonValue animation = data.get("animation");
+        this.userSprite = data.get("animation").getString("userSprite");
+        this.oppSprite = data.get("animation").getString("oppSprite");
+        this.width = data.get("animation").getInt("width");;
+        this.height = data.get("animation").getInt("height");;
+        this.userFrames = data.get("animation").getInt("userFrames");;
+        this.oppFrames = data.get("animation").getInt("oppFrames");;
 
-        JsonValue animation = data.get("animation");
-        this.userSprite = data.getString("userSprite");
-        this.oppSprite = data.getString("oppSprite");
-        this.width = data.getInt("width");;
-        this.height = data.getInt("height");;
-        this.userFrames = data.getInt("userFrames");;
-        this.oppFrames = data.getInt("oppFrames");;
+        //JsonValue movesData = data.get("moves");
+        this.moves = new String[data.get("moves").size];
 
-        JsonValue movesData = data.get("moves");
-        this.moves = new String[moves.length];;
+        for (int i = 0; i < data.get("moves").size; i++)
+        {
+
+        }
 
     }
 
