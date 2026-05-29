@@ -42,7 +42,7 @@ public class Main extends ApplicationAdapter {
 //        batch.dispose();
 //        image.dispose();
 //    }
-private SpriteBatch batch;
+    private SpriteBatch batch;
 
 
     private Texture sheet;
@@ -55,24 +55,39 @@ private SpriteBatch batch;
     @Override
     public void create() {
 
+        JsonReader reader = new JsonReader();
+
+
+        JsonValue root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
+
+
+        Pokemon rayquaza = new Pokemon(root.get("rayquaza"));
+
+
+        System.out.println(rayquaza.getName());
+        System.out.println(rayquaza.getHealth());
+        System.out.println(rayquaza.getAttack());
+        System.out.println(rayquaza.getType1());
 
         batch = new SpriteBatch();
 
 
         // LOAD SPRITE SHEET
-        sheet = new Texture("Pokemon/Sprites/reshiram/reshiramBack.png");
+        sheet = new Texture(rayquaza.getOppSprite());
+        int width = rayquaza.getWidth();
+        int height = rayquaza.getHeight();
+        int frameCount = rayquaza.getOppFrames();
 
 
         // CUT THE SHEET INTO FRAMES
-        TextureRegion[][] temp =
-            TextureRegion.split(sheet, 100, 89);
+        TextureRegion[][] temp = TextureRegion.split(sheet, width, height);
 
-// venusaur 86x71, rayquaza 101x106 front: 110, 97, 100 x 89 reshiram back 108 x 83 front
+        // venusaur 86x71, rayquaza 101x106 front: 110, 97, 100 x 89 reshiram back 108 x 83 front
         // STORE FRAMES
         Array<TextureRegion> frames = new Array<>();
 
 
-        int frameCount = 225;
+        //int frameCount = 225;
 
 
         for (int row = 0; row < temp.length; row++) {
@@ -99,31 +114,6 @@ private SpriteBatch batch;
 
 
         stateTime = 0f;
-
-        @Override
-        public void create() {
-
-
-            JsonReader reader = new JsonReader();
-
-
-            JsonValue root =
-                reader.parse(
-                    Gdx.files.internal(
-                        "pokemon/pokemon.json"));
-
-
-            Pokemon rayquaza =
-                new Pokemon(
-                    root.get("rayquaza"));
-
-
-            System.out.println(rayquaza.getName());
-            System.out.println(rayquaza.getName());
-            System.out.println(rayquaza.getHealth());
-            System.out.println(rayquaza.getAttack());
-            System.out.println(rayquaza.getType1());
-        }
 
     }
 

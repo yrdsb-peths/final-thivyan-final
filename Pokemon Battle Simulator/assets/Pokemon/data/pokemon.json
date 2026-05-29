@@ -25,18 +25,14 @@
     ],
 
 
-    "sprites": {
-      "front": "pokemon/sprites/rayquaza/front_sheet.png",
-      "back": "pokemon/sprites/rayquaza/back_sheet.png",
-      "icon": "pokemon/icons/rayquaza.png"
-    },
-
-
     "animation": {
-      "frameWidth": 128,
-      "frameHeight": 128,
-      "frontFrameCount": 45,
-      "backFrameCount": 45,
+      "userSprite": "pokemon/sprites/rayquaza/rayquazaBack.png",
+      "oppSprite": "pokemon/sprites/rayquaza/rayquazaFront.png",
+      "icon": "pokemon/icons/rayquaza.png",
+      "width": 110,
+      "height": 97,
+      "userFrames": 45,
+      "oppFrames": 115,
       "frameDuration": 0.05,
       "scale": 2.5
     },
@@ -73,18 +69,14 @@
     ],
 
 
-    "sprites": {
-      "front": "pokemon/sprites/reshiram/front_sheet.png",
-      "back": "pokemon/sprites/reshiram/back_sheet.png",
-      "icon": "pokemon/icons/reshiram.png"
-    },
-
-
     "animation": {
-      "frameWidth": 128,
-      "frameHeight": 128,
-      "frontFrameCount": 45,
-      "backFrameCount": 45,
+      "userSprite": "Pokemon/sprites/reshiram/reshiramBack.png",
+      "oppSprite": "Pokemon/sprites/reshiram/reshiramFront.png",
+      "icon": "pokemon/icons/reshiram.png",
+      "width": 100,
+      "height": 89,
+      "userFrames": 225,
+      "oppFrames": 45,
       "frameDuration": 0.05,
       "scale": 2.7
     },

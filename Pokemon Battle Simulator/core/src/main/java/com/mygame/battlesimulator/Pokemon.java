@@ -1,5 +1,10 @@
 package com.mygame.battlesimulator;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -24,6 +29,15 @@ public class Pokemon {
     private int oppFrames;
     private boolean legendary;
     //private boolean canMegaEvolve;
+
+    private SpriteBatch batch;
+
+
+    private Texture sheet;
+    private Animation<TextureRegion> animation;
+
+
+    private float stateTime;
 
 //    public Pokemon(String name, int health, int attack, int defense, int specialAttack, int specialDefense, int speed, String type1, String type2, String userSprite, String oppSprite, String[] moves, int width, int height, int userFrames, int oppFrames)
 //    {
@@ -55,8 +69,8 @@ public class Pokemon {
         this.specialAttack = data.get("stats").getInt("specialAttack");
         this.specialDefense = data.get("stats").getInt("specialDefense");
         this.speed = data.get("stats").getInt("speed");;
-        this.type1 = data.get("stats").getString("type1");
-        this.type2 = data.get("stats").getString("type2");
+        this.type1 = data.getString("type1");
+        this.type2 = data.getString("type2");
 
         //JsonValue animation = data.get("animation");
         this.userSprite = data.get("animation").getString("userSprite");
