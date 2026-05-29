@@ -154,4 +154,8 @@ public class Pokemon {
     public int getOppFrames() {
         return oppFrames;
     }
+
+    public String[] getMoves() {
+        return moves;
+    }
 }

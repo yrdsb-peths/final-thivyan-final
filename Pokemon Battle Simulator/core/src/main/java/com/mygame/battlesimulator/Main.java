@@ -8,14 +8,14 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
-
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.utils.*;
 
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -43,103 +43,194 @@ public class Main extends ApplicationAdapter {
 //        image.dispose();
 //    }
     private SpriteBatch batch;
-
+    private ShapeRenderer shapeRenderer;
 
     private Texture sheet;
     private Animation<TextureRegion> animation;
 
 
     private float stateTime;
-
+    private BitmapFont font;
 
     @Override
     public void create() {
 
-        JsonReader reader = new JsonReader();
+//        JsonReader reader = new JsonReader();
+//
+//
+//        JsonValue root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
+//
+//
+//        Pokemon rayquaza = new Pokemon(root.get("rayquaza"));
+//
+//
+//        System.out.println(rayquaza.getName());
+//        System.out.println(rayquaza.getHealth());
+//        System.out.println(rayquaza.getAttack());
+//        System.out.println(rayquaza.getType1());
 
-
-        JsonValue root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
-
-
-        Pokemon rayquaza = new Pokemon(root.get("rayquaza"));
-
-
-        System.out.println(rayquaza.getName());
-        System.out.println(rayquaza.getHealth());
-        System.out.println(rayquaza.getAttack());
-        System.out.println(rayquaza.getType1());
-
+        shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
+//
+//
+//        // LOAD SPRITE SHEET
+//        sheet = new Texture(rayquaza.getOppSprite());
+//        int width = rayquaza.getWidth();
+//        int height = rayquaza.getHeight();
+//        int frameCount = rayquaza.getOppFrames();
+//
+//
+//        // CUT THE SHEET INTO FRAMES
+//        TextureRegion[][] temp = TextureRegion.split(sheet, width, height);
+//
+//        // venusaur 86x71, rayquaza 101x106 front: 110, 97, 100 x 89 reshiram back 108 x 83 front
+//        // STORE FRAMES
+//        Array<TextureRegion> frames = new Array<>();
+//
+//
+//        //int frameCount = 225;
+//
+//
+//        for (int row = 0; row < temp.length; row++) {
+//
+//
+//            for (int col = 0; col < temp[row].length; col++) {
+//
+//
+//                if (frames.size >= frameCount) {
+//                    break;
+//                }
+//
+//
+//                frames.add(temp[row][col]);
+//            }
+//        }
+//
+//
+//        // CREATE ANIMATION
+//        animation = new Animation<>(0.05f, frames);
+//
+//
+//        animation.setPlayMode(Animation.PlayMode.LOOP);
+//
+//
+//        stateTime = 0f;
+
+        FreeTypeFontGenerator generator =
+            new FreeTypeFontGenerator(
+                Gdx.files.internal(
+                    "fonts/pokemon-ds-font.ttf"));
 
 
-        // LOAD SPRITE SHEET
-        sheet = new Texture(rayquaza.getOppSprite());
-        int width = rayquaza.getWidth();
-        int height = rayquaza.getHeight();
-        int frameCount = rayquaza.getOppFrames();
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter =
+            new FreeTypeFontGenerator.FreeTypeFontParameter();
 
 
-        // CUT THE SHEET INTO FRAMES
-        TextureRegion[][] temp = TextureRegion.split(sheet, width, height);
-
-        // venusaur 86x71, rayquaza 101x106 front: 110, 97, 100 x 89 reshiram back 108 x 83 front
-        // STORE FRAMES
-        Array<TextureRegion> frames = new Array<>();
+        parameter.size = 32;
 
 
-        //int frameCount = 225;
+        font =
+            generator.generateFont(parameter);
 
 
-        for (int row = 0; row < temp.length; row++) {
+        generator.dispose();
 
-
-            for (int col = 0; col < temp[row].length; col++) {
-
-
-                if (frames.size >= frameCount) {
-                    break;
-                }
-
-
-                frames.add(temp[row][col]);
-            }
-        }
-
-
-        // CREATE ANIMATION
-        animation = new Animation<>(0.05f, frames);
-
-
-        animation.setPlayMode(Animation.PlayMode.LOOP);
-
-
-        stateTime = 0f;
 
     }
 
 
     @Override
     public void render() {
+        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+        JsonReader reader = new JsonReader();
 
 
-        stateTime += Gdx.graphics.getDeltaTime();
+        JsonValue root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
+        JsonValue movesRoot = reader.parse(Gdx.files.internal("Pokemon/data/moves.Json"));
+
+        Pokemon reshiram = new Pokemon(root.get("reshiram"));
 
 
-        Gdx.gl.glClearColor(0.15f, 0.15f, 0.2f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        System.out.println(reshiram.getName());
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+        BattleScreen battleScreen = new BattleScreen();
+        //String moveType = "Dragon";
+        //battleScreen.findColour("Dragon");
+
+        for (int i = 0; i < 4; i++)
+        {
+            int x;
+            int y;
+
+            if (i < 2)
+            {
+                 x = 50 + i * (270);
+                 y = 50;
+            }
+            else
+            {
+                x = 50 + ((i - 2) * 270);
+                y = 140;
+            }
+
+            String moveName = reshiram.getMoves()[i];
+            JsonValue moves = movesRoot.get(moveName);
+            String moveType = moves.getString("type");
+
+            shapeRenderer.setColor(Color.valueOf(battleScreen.findColour(moveType)));
 
 
-        TextureRegion currentFrame =
-            animation.getKeyFrame(stateTime);
+            shapeRenderer.rect(x, y, 250, 70);
+        }
 
+
+        shapeRenderer.end();
 
         batch.begin();
 
+        for (int i = 0; i < 4; i++) {
 
-        batch.draw(currentFrame, 140, 210);
+            String moveName =
+                reshiram.getMoves()[i];
 
+            int x =
+                50 + (i % 2) * 270;
+
+            int y =
+                50 + (i / 2) * 90;
+
+            font.draw(
+                batch,
+                moveName,
+                x + 20,
+                y + 45
+            );
+        }
 
         batch.end();
+
+
+
+//        stateTime += Gdx.graphics.getDeltaTime();
+//
+//
+//        Gdx.gl.glClearColor(0.15f, 0.15f, 0.2f, 1f);
+//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//
+//
+//        TextureRegion currentFrame =
+//            animation.getKeyFrame(stateTime);
+//
+//
+//        batch.begin();
+//
+//
+//        batch.draw(currentFrame, 140, 210);
+//
+//
+//        batch.end();
 
     }
 
