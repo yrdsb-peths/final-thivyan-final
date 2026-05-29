@@ -12,6 +12,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
+
 
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -95,6 +99,32 @@ private SpriteBatch batch;
 
 
         stateTime = 0f;
+
+        @Override
+        public void create() {
+
+
+            JsonReader reader = new JsonReader();
+
+
+            JsonValue root =
+                reader.parse(
+                    Gdx.files.internal(
+                        "pokemon/pokemon.json"));
+
+
+            Pokemon rayquaza =
+                new Pokemon(
+                    root.get("rayquaza"));
+
+
+            System.out.println(rayquaza.getName());
+            System.out.println(rayquaza.getName());
+            System.out.println(rayquaza.getHealth());
+            System.out.println(rayquaza.getAttack());
+            System.out.println(rayquaza.getType1());
+        }
+
     }
 
 
@@ -120,6 +150,7 @@ private SpriteBatch batch;
 
 
         batch.end();
+
     }
 
 

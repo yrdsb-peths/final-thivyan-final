@@ -1,0 +1,95 @@
+{
+  "rayquaza": {
+    "name": "Rayquaza",
+
+
+    "type1": "Dragon",
+    "type2": "Flying",
+
+
+    "stats": {
+      "hp": 357,
+      "attack": 438,
+      "defense": 306,
+      "specialAttack": 438,
+      "specialDefense": 306,
+      "speed": 317
+    },
+
+
+    "moves": [
+      "Dragon Claw",
+      "Extreme Speed",
+      "Earthquake",
+      "Flamethrower"
+    ],
+
+
+    "sprites": {
+      "front": "pokemon/sprites/rayquaza/front_sheet.png",
+      "back": "pokemon/sprites/rayquaza/back_sheet.png",
+      "icon": "pokemon/icons/rayquaza.png"
+    },
+
+
+    "animation": {
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "frontFrameCount": 45,
+      "backFrameCount": 45,
+      "frameDuration": 0.05,
+      "scale": 2.5
+    },
+
+
+    "canMegaEvolve": true,
+    "megaId": "mega_rayquaza"
+  },
+
+
+  "reshiram": {
+    "name": "Reshiram",
+
+
+    "type1": "Dragon",
+    "type2": "Fire",
+
+
+    "stats": {
+      "hp": 404,
+      "attack": 372,
+      "defense": 328,
+      "specialAttack": 438,
+      "specialDefense": 328,
+      "speed": 306
+    },
+
+
+    "moves": [
+      "Flamethrower",
+      "Draco Meteor",
+      "Dragon Claw",
+      "Air Slash"
+    ],
+
+
+    "sprites": {
+      "front": "pokemon/sprites/reshiram/front_sheet.png",
+      "back": "pokemon/sprites/reshiram/back_sheet.png",
+      "icon": "pokemon/icons/reshiram.png"
+    },
+
+
+    "animation": {
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "frontFrameCount": 45,
+      "backFrameCount": 45,
+      "frameDuration": 0.05,
+      "scale": 2.7
+    },
+
+
+    "canMegaEvolve": false
+  }
+}

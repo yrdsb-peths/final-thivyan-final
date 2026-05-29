@@ -22,6 +22,8 @@ public class Pokemon {
     private int height;
     private int userFrames;
     private int oppFrames;
+    private boolean legendary;
+    //private boolean canMegaEvolve;
 
 //    public Pokemon(String name, int health, int attack, int defense, int specialAttack, int specialDefense, int speed, String type1, String type2, String userSprite, String oppSprite, String[] moves, int width, int height, int userFrames, int oppFrames)
 //    {
@@ -46,7 +48,7 @@ public class Pokemon {
     public Pokemon(JsonValue data)
     {
         this.name = data.getString("name");
-        
+
         this.health = data.get("stats").getInt("hp");
         this.attack = data.get("stats").getInt("attack");
         this.defense = data.get("stats").getInt("defense");
@@ -69,10 +71,73 @@ public class Pokemon {
 
         for (int i = 0; i < data.get("moves").size; i++)
         {
-
+            this.moves[i] = data.get("moves").getString(i);
         }
 
     }
 
 
+    public String getName() {
+        return name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public int getSpecialAttack() {
+        return specialAttack;
+    }
+
+    public int getSpecialDefense() {
+        return specialDefense;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public String getType1() {
+        return type1;
+    }
+
+    public String getType2() {
+        return type2;
+    }
+
+    public String getUserSprite() {
+        return userSprite;
+    }
+
+    public String getOppSprite() {
+        return oppSprite;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getUserFrames() {
+        return userFrames;
+    }
+
+    public int getOppFrames() {
+        return oppFrames;
+    }
 }
