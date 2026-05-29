@@ -151,7 +151,7 @@ public class Main extends ApplicationAdapter {
         Pokemon reshiram = new Pokemon(root.get("reshiram"));
 
 
-        System.out.println(reshiram.getName());
+        //System.out.println(reshiram.getName());
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
@@ -192,21 +192,13 @@ public class Main extends ApplicationAdapter {
 
         for (int i = 0; i < 4; i++) {
 
-            String moveName =
-                reshiram.getMoves()[i];
+            String moveName = reshiram.getMoves()[i];
 
-            int x =
-                50 + (i % 2) * 270;
+            int x = 50 + (i % 2) * 270;
 
-            int y =
-                50 + (i / 2) * 90;
+            int y = 50 + (i / 2) * 90;
 
-            font.draw(
-                batch,
-                moveName,
-                x + 20,
-                y + 45
-            );
+            font.draw(batch, moveName, x + 20, y + 45);
         }
 
         batch.end();
