@@ -1,0 +1,21 @@
+Pokemon/Sprites/rayquaza/RayquazaBack.png
+Pokemon/Sprites/rayquaza/RayquazaFront.png
+Pokemon/Sprites/reshiram/charizard-megax.gif
+Pokemon/Sprites/reshiram/infernape (1).gif
+Pokemon/Sprites/reshiram/infernape.gif
+Pokemon/Sprites/reshiram/rayquaza-mega.gif
+Pokemon/Sprites/reshiram/reshiramBack.png
+Pokemon/Sprites/reshiram/reshiramFront.png
+Pokemon/Sprites/reshiram/reshiramIcon.png
+Pokemon/Sprites/venusaur/VenusaurFront.png
+Pokemon/data/moves.json
+Pokemon/data/pokemon.json
+fonts/pokemon-ds-font.ttf
+libgdx.png
+ui/font-list.fnt
+ui/font-subtitle.fnt
+ui/font-window.fnt
+ui/font.fnt
+ui/uiskin.atlas
+ui/uiskin.json
+ui/uiskin.png
