@@ -3,7 +3,16 @@ package com.mygame.battlesimulator;
 public class BattleManager {
     private int damage;
 
-    public int calculateDamage(Pokemon attacker, Pokemon defender, Move move) {
+
+    // Checks which Pokemon is faster, allowing the quicker to move first
+    public boolean checkSpeed(Pokemon user, Pokemon opponent)
+    {
+        return user.getSpeed() > opponent.getSpeed();
+    }
+
+    // Calculates the damage by a Pokemon's move
+    public int calculateDamage(Pokemon attacker, Pokemon defender, Move move)
+    {
 
         if (move.getCategory().equals("Physical")) {
             double baseAttack = attacker.getAttack();
@@ -24,5 +33,4 @@ public class BattleManager {
         return damage;
     }
 
-    
 }
