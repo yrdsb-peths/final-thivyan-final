@@ -116,14 +116,10 @@ public class Main extends ApplicationAdapter {
 //
 //        stateTime = 0f;
 
-        FreeTypeFontGenerator generator =
-            new FreeTypeFontGenerator(
-                Gdx.files.internal(
-                    "fonts/pokemon-ds-font.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/pokemon-ds-font.ttf"));
 
 
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter =
-            new FreeTypeFontGenerator.FreeTypeFontParameter();
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
 
         parameter.size = 32;
@@ -135,6 +131,7 @@ public class Main extends ApplicationAdapter {
 
         generator.dispose();
 
+        BattleManager battle = new BattleManager();
 
     }
 
@@ -203,7 +200,7 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
 
-        int damage = DamageCalc.calculateDamage();
+        int damage = battle.calculateDamage();
         System.out.println();
 
 
