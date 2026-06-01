@@ -148,7 +148,7 @@ public class Main extends ApplicationAdapter {
         JsonValue root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
         JsonValue movesRoot = reader.parse(Gdx.files.internal("Pokemon/data/moves.Json"));
 
-        Pokemon reshiram = new Pokemon(root.get("reshiram"));
+        Pokemon reshiram = new Pokemon(root.get("rayquaza"));
 
 
         //System.out.println(reshiram.getName());
@@ -203,6 +203,8 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
 
+        int damage = DamageCalc.calculateDamage();
+        System.out.println();
 
 
 //        stateTime += Gdx.graphics.getDeltaTime();
@@ -230,7 +232,7 @@ public class Main extends ApplicationAdapter {
     @Override
     public void dispose() {
 
-
+        shapeRenderer.dispose();
         batch.dispose();
         sheet.dispose();
     }
