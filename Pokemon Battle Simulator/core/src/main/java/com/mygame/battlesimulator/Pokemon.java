@@ -13,6 +13,7 @@ import com.badlogic.gdx.Gdx;
 public class Pokemon {
     private String name;
     private int health;
+    private int currentHealth = health;
     private int attack;
     private int defense;
     private int specialAttack;
@@ -90,6 +91,19 @@ public class Pokemon {
 
     }
 
+    public void takeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+    }
+
+    public void faint()
+    {
+        switchPokemon();
+    }
 
     public String getName() {
         return name;
