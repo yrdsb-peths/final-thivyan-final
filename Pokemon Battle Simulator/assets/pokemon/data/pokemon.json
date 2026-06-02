@@ -1,0 +1,287 @@
+{
+  "rayquaza": {
+    "name": "Rayquaza",
+    "type1": "Dragon",
+    "type2": "Flying",
+    "legendary": true,
+    "stats": {
+      "hp": 357,
+      "attack": 438,
+      "defense": 306,
+      "specialAttack": 438,
+      "specialDefense": 306,
+      "speed": 317
+    },
+    "moves": ["Dragon Claw", "Extreme Speed", "Earthquake", "Flamethrower"],
+    "animation": {
+      "userSprite": "pokemon/sprites/rayquaza/rayquazaBack.png",
+      "oppSprite": "pokemon/sprites/rayquaza/rayquazaFront.png",
+      "icon": "pokemon/icons/rayquaza.png",
+      "width": 110,
+      "height": 97,
+      "userFrames": 45,
+      "oppFrames": 115,
+      "frameDuration": 0.05,
+      "scale": 2.5
+    },
+    "canMegaEvolve": true,
+    "megaId": "mega_rayquaza"
+  },
+
+  "reshiram": {
+    "name": "Reshiram",
+    "type1": "Dragon",
+    "type2": "Fire",
+    "legendary": true,
+    "stats": {
+      "hp": 404,
+      "attack": 372,
+      "defense": 328,
+      "specialAttack": 438,
+      "specialDefense": 328,
+      "speed": 306
+    },
+    "moves": ["Flamethrower", "Draco Meteor", "Dragon Claw", "Air Slash"],
+    "animation": {
+      "userSprite": "pokemon/sprites/reshiram/reshiramBack.png",
+      "oppSprite": "pokemon/sprites/reshiram/reshiramFront.png",
+      "icon": "pokemon/icons/reshiram.png",
+      "width": 100,
+      "height": 89,
+      "userFrames": 225,
+      "oppFrames": 45,
+      "frameDuration": 0.05,
+      "scale": 2.7
+    },
+    "canMegaEvolve": false
+  },
+
+  "charizard": {
+    "name": "Charizard",
+    "type1": "Fire",
+    "type2": "Flying",
+    "legendary": false,
+    "stats": {
+      "hp": 360,
+      "attack": 293,
+      "defense": 280,
+      "specialAttack": 348,
+      "specialDefense": 295,
+      "speed": 328
+    },
+    "moves": ["Flamethrower", "Air Slash", "Dragon Claw", "Earthquake"],
+    "animation": {
+      "userSprite": "pokemon/sprites/charizard/charizardBack.png",
+      "oppSprite": "pokemon/sprites/charizard/charizardFront.png",
+      "icon": "pokemon/icons/charizard.png",
+      "width": 96,
+      "height": 96,
+      "userFrames": 45,
+      "oppFrames": 45,
+      "frameDuration": 0.05,
+      "scale": 2.3
+    },
+    "canMegaEvolve": true,
+    "megaId": "mega_charizard_x"
+  },
+
+  "lucario": {
+    "name": "Lucario",
+    "type1": "Fighting",
+    "type2": "Steel",
+    "legendary": false,
+    "stats": {
+      "hp": 344,
+      "attack": 350,
+      "defense": 262,
+      "specialAttack": 361,
+      "specialDefense": 262,
+      "speed": 306
+    },
+    "moves": ["Aura Sphere", "Close Combat", "Flash Cannon", "Dark Pulse"],
+    "animation": {
+      "userSprite": "pokemon/sprites/lucario/lucarioBack.png",
+      "oppSprite": "pokemon/sprites/lucario/lucarioFront.png",
+      "icon": "pokemon/icons/lucario.png",
+      "width": 96,
+      "height": 96,
+      "userFrames": 45,
+      "oppFrames": 45,
+      "frameDuration": 0.05,
+      "scale": 2.0
+    },
+    "canMegaEvolve": true,
+    "megaId": "mega_lucario"
+  },
+
+  "garchomp": {
+    "name": "Garchomp",
+    "type1": "Dragon",
+    "type2": "Ground",
+    "legendary": false,
+    "stats": {
+      "hp": 420,
+      "attack": 394,
+      "defense": 317,
+      "specialAttack": 284,
+      "specialDefense": 295,
+      "speed": 333
+    },
+    "moves": ["Dragon Claw", "Earthquake", "Stone Edge", "Crunch"],
+    "animation": {
+      "userSprite": "pokemon/sprites/garchomp/garchompBack.png",
+      "oppSprite": "pokemon/sprites/garchomp/garchompFront.png",
+      "icon": "pokemon/icons/garchomp.png",
+      "width": 96,
+      "height": 96,
+      "userFrames": 45,
+      "oppFrames": 45,
+      "frameDuration": 0.05,
+      "scale": 2.4
+    },
+    "canMegaEvolve": true,
+    "megaId": "mega_garchomp"
+  },
+
+  "greninja": {
+    "name": "Greninja",
+    "type1": "Water",
+    "type2": "Dark",
+    "legendary": false,
+    "stats": {
+      "hp": 348,
+      "attack": 317,
+      "defense": 245,
+      "specialAttack": 339,
+      "specialDefense": 265,
+      "speed": 377
+    },
+    "moves": ["Surf", "Dark Pulse", "Ice Beam", "Air Slash"],
+    "animation": {
+      "userSprite": "pokemon/sprites/greninja/greninjaBack.png",
+      "oppSprite": "pokemon/sprites/greninja/greninjaFront.png",
+      "icon": "pokemon/icons/greninja.png",
+      "width": 96,
+      "height": 96,
+      "userFrames": 45,
+      "oppFrames": 45,
+      "frameDuration": 0.05,
+      "scale": 2.0
+    },
+    "canMegaEvolve": false
+  },
+
+  "darkrai": {
+    "name": "Darkrai",
+    "type1": "Dark",
+    "type2": "",
+    "legendary": true,
+    "stats": {
+      "hp": 344,
+      "attack": 306,
+      "defense": 262,
+      "specialAttack": 405,
+      "specialDefense": 306,
+      "speed": 383
+    },
+    "moves": ["Dark Pulse", "Shadow Ball", "Psychic", "Ice Beam"],
+    "animation": {
+      "userSprite": "pokemon/sprites/darkrai/darkraiBack.png",
+      "oppSprite": "pokemon/sprites/darkrai/darkraiFront.png",
+      "icon": "pokemon/icons/darkrai.png",
+      "width": 96,
+      "height": 96,
+      "userFrames": 45,
+      "oppFrames": 45,
+      "frameDuration": 0.05,
+      "scale": 2.2
+    },
+    "canMegaEvolve": false
+  },
+
+  "metagross": {
+    "name": "Metagross",
+    "type1": "Steel",
+    "type2": "Psychic",
+    "legendary": false,
+    "stats": {
+      "hp": 364,
+      "attack": 405,
+      "defense": 394,
+      "specialAttack": 317,
+      "specialDefense": 306,
+      "speed": 262
+    },
+    "moves": ["Flash Cannon", "Psychic", "Earthquake", "Ice Beam"],
+    "animation": {
+      "userSprite": "pokemon/sprites/metagross/metagrossBack.png",
+      "oppSprite": "pokemon/sprites/metagross/metagrossFront.png",
+      "icon": "pokemon/icons/metagross.png",
+      "width": 96,
+      "height": 96,
+      "userFrames": 45,
+      "oppFrames": 45,
+      "frameDuration": 0.05,
+      "scale": 2.4
+    },
+    "canMegaEvolve": true,
+    "megaId": "mega_metagross"
+  },
+
+  "volcarona": {
+    "name": "Volcarona",
+    "type1": "Bug",
+    "type2": "Fire",
+    "legendary": false,
+    "stats": {
+      "hp": 374,
+      "attack": 240,
+      "defense": 251,
+      "specialAttack": 405,
+      "specialDefense": 339,
+      "speed": 328
+    },
+    "moves": ["Bug Buzz", "Flamethrower", "Air Slash", "Psychic"],
+    "animation": {
+      "userSprite": "pokemon/sprites/volcarona/volcaronaBack.png",
+      "oppSprite": "pokemon/sprites/volcarona/volcaronaFront.png",
+      "icon": "pokemon/icons/volcarona.png",
+      "width": 96,
+      "height": 96,
+      "userFrames": 45,
+      "oppFrames": 45,
+      "frameDuration": 0.05,
+      "scale": 2.3
+    },
+    "canMegaEvolve": false
+  },
+
+  "mewtwo": {
+    "name": "Mewtwo",
+    "type1": "Psychic",
+    "type2": "",
+    "legendary": true,
+    "stats": {
+      "hp": 416,
+      "attack": 350,
+      "defense": 306,
+      "specialAttack": 447,
+      "specialDefense": 306,
+      "speed": 394
+    },
+    "moves": ["Psychic", "Shadow Ball", "Ice Beam", "Aura Sphere"],
+    "animation": {
+      "userSprite": "pokemon/sprites/mewtwo/mewtwoBack.png",
+      "oppSprite": "pokemon/sprites/mewtwo/mewtwoFront.png",
+      "icon": "pokemon/icons/mewtwo.png",
+      "width": 96,
+      "height": 96,
+      "userFrames": 45,
+      "oppFrames": 45,
+      "frameDuration": 0.05,
+      "scale": 2.4
+    },
+    "canMegaEvolve": true,
+    "megaId": "mega_mewtwo_x"
+  }
+}

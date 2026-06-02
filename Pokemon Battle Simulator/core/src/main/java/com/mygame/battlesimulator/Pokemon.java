@@ -29,7 +29,7 @@ public class Pokemon {
     private int userFrames;
     private int oppFrames;
     private boolean legendary;
-    //private boolean canMegaEvolve;
+    private boolean canMegaEvolve;
 
     private SpriteBatch batch;
 
@@ -89,6 +89,8 @@ public class Pokemon {
             this.moves[i] = data.get("moves").getString(i);
         }
 
+        this.legendary = data.getBoolean("legendary");
+        this.canMegaEvolve = data.getBoolean("canMegaEvolve");
     }
 
     public void takeDamage(int damage)
@@ -102,7 +104,7 @@ public class Pokemon {
 
     public void faint()
     {
-        switchPokemon();
+        //switchPokemon();
     }
 
     public String getName() {
@@ -171,5 +173,15 @@ public class Pokemon {
 
     public String[] getMoves() {
         return moves;
+    }
+
+    public boolean isLegendary()
+    {
+        return legendary;
+    }
+
+    public boolean canMega()
+    {
+        return canMegaEvolve;
     }
 }

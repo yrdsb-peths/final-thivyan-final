@@ -69,8 +69,7 @@ public class Main extends ApplicationAdapter {
 //        System.out.println(rayquaza.getAttack());
 //        System.out.println(rayquaza.getType1());
 
-        shapeRenderer = new ShapeRenderer();
-        batch = new SpriteBatch();
+
 //
 //
 //        // LOAD SPRITE SHEET
@@ -116,92 +115,106 @@ public class Main extends ApplicationAdapter {
 //
 //        stateTime = 0f;
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/pokemon-ds-font.ttf"));
+        //shapeRenderer = new ShapeRenderer();
+        //batch = new SpriteBatch();
+//        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/pokemon-ds-font.ttf"));
+//
+//
+//        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+//
+//
+//        parameter.size = 32;
+//
+//
+//        font = generator.generateFont(parameter);
+//
+//
+//        generator.dispose();
 
+        PokemonDatabase database = new PokemonDatabase();
+        Pokemon[] team = new Pokemon[6];
+        team[0] = database.getRandomMega();
+        team[1] = database.getRandomLegendary();
+        for (int i = 0; i < 4; i++)
+        {
+            team[i] = database.getRandomPokemon();
+        }
 
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
-
-        parameter.size = 32;
-
-
-        font =
-            generator.generateFont(parameter);
-
-
-        generator.dispose();
-
-        BattleManager battle = new BattleManager();
-
+        Team playerTeam = new Team(team);
+        for (int i = 0; i < 6; i++)
+        {
+            System.out.println(team[i]);
+        }
+        //System.out.println("awrnoawt");
     }
 
 
     @Override
     public void render() {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        JsonReader reader = new JsonReader();
+//        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+//        JsonReader reader = new JsonReader();
+//
+//
+//        JsonValue root = reader.parse(Gdx.files.internal("pokemon/data/pokemon.json"));
+//        JsonValue movesRoot = reader.parse(Gdx.files.internal("pokemon/data/moves.Json"));
+//
+//        Pokemon reshiram = new Pokemon(root.get("greninja"));
+//
+//
+//        //System.out.println(reshiram.getName());
+//
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+//
+//        BattleScreen battleScreen = new BattleScreen();
+//        //String moveType = "Dragon";
+//        //battleScreen.findColour("Dragon");
+//
+//        for (int i = 0; i < 4; i++)
+//        {
+//            int x;
+//            int y;
+//
+//            if (i < 2)
+//            {
+//                 x = 50 + i * (270);
+//                 y = 50;
+//            }
+//            else
+//            {
+//                x = 50 + ((i - 2) * 270);
+//                y = 140;
+//            }
+//
+//            String moveName = reshiram.getMoves()[i];
+//            JsonValue moves = movesRoot.get(moveName);
+//            String moveType = moves.getString("type");
+//
+//            shapeRenderer.setColor(Color.valueOf(battleScreen.findColour(moveType)));
+//
+//
+//            shapeRenderer.rect(x, y, 250, 70);
+//        }
+//
+//
+//        shapeRenderer.end();
+//
+//        batch.begin();
+//
+//        for (int i = 0; i < 4; i++) {
+//
+//            String moveName = reshiram.getMoves()[i];
+//
+//            int x = 50 + (i % 2) * 270;
+//
+//            int y = 50 + (i / 2) * 90;
+//
+//            font.draw(batch, moveName, x + 20, y + 45);
+//        }
+//
+//        batch.end();
 
-
-        JsonValue root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
-        JsonValue movesRoot = reader.parse(Gdx.files.internal("Pokemon/data/moves.Json"));
-
-        Pokemon reshiram = new Pokemon(root.get("rayquaza"));
-
-
-        //System.out.println(reshiram.getName());
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        BattleScreen battleScreen = new BattleScreen();
-        //String moveType = "Dragon";
-        //battleScreen.findColour("Dragon");
-
-        for (int i = 0; i < 4; i++)
-        {
-            int x;
-            int y;
-
-            if (i < 2)
-            {
-                 x = 50 + i * (270);
-                 y = 50;
-            }
-            else
-            {
-                x = 50 + ((i - 2) * 270);
-                y = 140;
-            }
-
-            String moveName = reshiram.getMoves()[i];
-            JsonValue moves = movesRoot.get(moveName);
-            String moveType = moves.getString("type");
-
-            shapeRenderer.setColor(Color.valueOf(battleScreen.findColour(moveType)));
-
-
-            shapeRenderer.rect(x, y, 250, 70);
-        }
-
-
-        shapeRenderer.end();
-
-        batch.begin();
-
-        for (int i = 0; i < 4; i++) {
-
-            String moveName = reshiram.getMoves()[i];
-
-            int x = 50 + (i % 2) * 270;
-
-            int y = 50 + (i / 2) * 90;
-
-            font.draw(batch, moveName, x + 20, y + 45);
-        }
-
-        batch.end();
-
-        int damage = battle.calculateDamage();
-        System.out.println();
+        //int damage = battle.calculateDamage();
+        //System.out.println();
 
 
 //        stateTime += Gdx.graphics.getDeltaTime();

@@ -29,8 +29,8 @@ public class Team {
         currentIndex = newIndex;
     }
 
-    public boolean allFainted()
-    {
-        //
-    }
+//    public boolean allFainted()
+//    {
+//        //
+//    }
 }
