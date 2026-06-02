@@ -3,6 +3,10 @@ package com.mygame.battlesimulator;
 public class BattleManager {
     private int damage;
 
+    public void generateTeam()
+    {
+
+    }
 
     // Checks which Pokemon is faster, allowing the quicker to move first
     public boolean checkSpeed(Pokemon user, Pokemon opponent)
