@@ -157,6 +157,7 @@ public class Main extends ApplicationAdapter {
 
         String[] moves = playerTeam.getCurrentPokemon().getMoves();
 
+        int screenWidth = Gdx.graphics.getWidth();
         int buttonWidth = 180;
         int buttonHeight = 45;
 
@@ -218,6 +219,7 @@ public class Main extends ApplicationAdapter {
 
             int mouseX = Gdx.input.getX();
             int mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+            //startX = screenWidth/2 - 200;
             System.out.println("mouse x: " + mouseX);
             System.out.println("mouse y: " + mouseY);
 
@@ -247,7 +249,7 @@ public class Main extends ApplicationAdapter {
             {
                 oppRenderer.dispose();
 
-                oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), true);
+                oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), false);
             }
             else
             {
