@@ -4,7 +4,7 @@ package com.mygame.battlesimulator;
 import com.badlogic.gdx.utils.JsonValue;
 
 public class Move {
-    //private String name;
+    private String name;
     private String type;
     private String category;
     private int power;
@@ -12,13 +12,14 @@ public class Move {
     private int points;
 
 
-    public Move(JsonValue data)
+    public Move(String name, JsonValue data)
     {
+        this.name = name;
         this.type = data.getString("type");
         this.category = data.getString("category");
 
-        this.power = data.getInt("hp");
-        this.accuracy = data.getInt("attack");
+        this.power = data.getInt("power");
+        this.accuracy = data.getInt("accuracy");
         this.points = data.getInt("pp");
     }
 
@@ -40,5 +41,9 @@ public class Move {
 
     public int getPoints() {
         return points;
+    }
+
+    public String getName() {
+        return name;
     }
 }

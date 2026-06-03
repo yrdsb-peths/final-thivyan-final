@@ -31,6 +31,7 @@ public class Main extends ApplicationAdapter {
     private float stateTime;
     private BitmapFont font;
 
+    private BattleManager battle;
     private Team playerTeam;
     private Team oppTeam;
     private float displayedPlayerHp;
@@ -49,28 +50,28 @@ public class Main extends ApplicationAdapter {
 //
 //        stateTime = 0f;
 
-        //shapeRenderer = new ShapeRenderer();
-        //batch = new SpriteBatch();
-//        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/pokemon-ds-font.ttf"));
-//
-//
-//        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-//
-//
-//        parameter.size = 32;
-//
-//
-//        font = generator.generateFont(parameter);
-//
-//
-//        generator.dispose();
+//        shapeRenderer = new ShapeRenderer();
+//        batch = new SpriteBatch();
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/pokemon-ds-font.ttf"));
+
+
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+
+        parameter.size = 32;
+
+
+        font = generator.generateFont(parameter);
+
+
+        generator.dispose();
 
         PokemonDatabase database = new PokemonDatabase();
 
 
         Pokemon[] team = new Pokemon[6];
         //team[0] = database.getRandomMega();
-        team[0] = database.getPokemon("Reshiram");
+        team[0] = database.getPokemon("reshiram");
         team[1] = database.getRandomLegendary();
         for (int i = 2; i < 6; i++) {
             team[i] = database.getRandomPokemon();
@@ -86,7 +87,7 @@ public class Main extends ApplicationAdapter {
 
         Pokemon[] team2 = new Pokemon[6];
         //team2[0] = database.getRandomMega();
-        team2[0] = database.getPokemon("Rayquaza");
+        team2[0] = database.getPokemon("rayquaza");
         team2[1] = database.getRandomLegendary();
         for (int i = 2; i < 6; i++) {
             team2[i] = database.getRandomPokemon();
@@ -102,6 +103,7 @@ public class Main extends ApplicationAdapter {
 
 
             //System.out.println()
+        battle = new BattleManager();
         batch = new SpriteBatch();
         playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
         oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), false);
@@ -131,57 +133,47 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
 
+        // health bar
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 400, 100);
+        drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 400, 200);
         drawHp(oppTeam.getCurrentPokemon(), displayedOppHp, 80, 400);
         shapeRenderer.end();
 
-        if (Gdx.input.justTouched())
+
+
+        JsonReader reader = new JsonReader();
+
+
+        JsonValue root = reader.parse(Gdx.files.internal("pokemon/data/pokemon.json"));
+        JsonValue movesRoot = reader.parse(Gdx.files.internal("pokemon/data/moves.Json"));
+
+        //System.out.println(reshiram.getName());
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+        BattleScreen battleScreen = new BattleScreen();
+        //String moveType = "Dragon";
+        //battleScreen.findColour("Dragon");
+
+        String[] moves = playerTeam.getCurrentPokemon().getMoves();
+
+        int buttonWidth = 180;
+        int buttonHeight = 45;
+
+        int startX = 40;
+        int startY = 35;
+
+        int gapX = 20;
+        int gapY = 15;
+
+
+        for (int i = 0; i < 4; i++)
         {
-            playerTeam.getCurrentPokemon().takeDamage(50);
-            System.out.println(playerTeam.getCurrentPokemon().getCurrentHealth());
-        }
-
-        if (playerTeam.getCurrentPokemon().isFainted())
-        {
-            System.out.println(playerTeam.getCurrentPokemon().getName() + " fainted");
-            boolean switched = playerTeam.findAvailablePokemon();
-            if (switched)
-            {
-                playerRenderer.dispose();
-
-                playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
-            }
-            else
-            {
-                System.out.println("no more pokemon");
-            }
-        }
+            int x = startX + (i % 2) * (buttonWidth + gapX);
+            int y = startY + (i / 2) * (buttonHeight + gapY);
 
 
-//        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-//        JsonReader reader = new JsonReader();
-//
-//
-//        JsonValue root = reader.parse(Gdx.files.internal("pokemon/data/pokemon.json"));
-//        JsonValue movesRoot = reader.parse(Gdx.files.internal("pokemon/data/moves.Json"));
-//
-//        Pokemon reshiram = new Pokemon(root.get("greninja"));
-//
-//
-//        //System.out.println(reshiram.getName());
-//
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-//
-//        BattleScreen battleScreen = new BattleScreen();
-//        //String moveType = "Dragon";
-//        //battleScreen.findColour("Dragon");
-//
-//        for (int i = 0; i < 4; i++)
-//        {
-//            int x;
-//            int y;
-//
+
 //            if (i < 2)
 //            {
 //                 x = 50 + i * (270);
@@ -192,37 +184,76 @@ public class Main extends ApplicationAdapter {
 //                x = 50 + ((i - 2) * 270);
 //                y = 140;
 //            }
-//
-//            String moveName = reshiram.getMoves()[i];
-//            JsonValue moves = movesRoot.get(moveName);
-//            String moveType = moves.getString("type");
-//
-//            shapeRenderer.setColor(Color.valueOf(battleScreen.findColour(moveType)));
-//
-//
-//            shapeRenderer.rect(x, y, 250, 70);
-//        }
-//
-//
-//        shapeRenderer.end();
-//
-//        batch.begin();
-//
-//        for (int i = 0; i < 4; i++) {
-//
-//            String moveName = reshiram.getMoves()[i];
-//
+
+            String moveName = moves[i];
+            JsonValue movesData = movesRoot.get(moveName);
+            String moveType = movesData.getString("type");
+
+            shapeRenderer.setColor(Color.valueOf(battleScreen.findColour(moveType)));
+
+
+            shapeRenderer.rect(x, y, buttonWidth, buttonHeight);
+        }
+
+
+        shapeRenderer.end();
+
+        batch.begin();
+
+        for (int i = 0; i < 4; i++) {
+
+            int x = startX + (i % 2) * (buttonWidth + gapX);
+            int y = startY + (i / 2) * (buttonHeight + gapY);
 //            int x = 50 + (i % 2) * 270;
 //
 //            int y = 50 + (i / 2) * 90;
-//
-//            font.draw(batch, moveName, x + 20, y + 45);
-//        }
-//
-//        batch.end();
 
-        //int damage = battle.calculateDamage();
-        //System.out.println();
+            font.draw(batch, moves[i], x + 12, y + 30);
+        }
+
+        batch.end();
+
+        if (Gdx.input.justTouched())
+        {
+
+            int mouseX = Gdx.input.getX();
+            int mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+            System.out.println("mouse x: " + mouseX);
+            System.out.println("mouse y: " + mouseY);
+
+            for (int i = 0; i < 4; i++)
+            {
+                int x = startX + (i % 2) * (buttonWidth + gapX);
+                int y = startY + (i / 2) * (buttonHeight + gapY);
+
+                if (mouseX >= x && mouseX <= x + buttonWidth && mouseY >= y && mouseY <= y + buttonHeight)
+                {
+                    String moveName = moves[i];
+                    JsonValue moveData = movesRoot.get(moveName);
+                    Move move = new Move(moveName, moveData);
+
+                    battle.applyMoveDamage(playerTeam.getCurrentPokemon(), oppTeam.getCurrentPokemon(), move);
+
+                    System.out.println(playerTeam.getCurrentPokemon().getName() + " used " + move.getName());
+                }
+            }
+        }
+
+        if (oppTeam.getCurrentPokemon().isFainted())
+        {
+            System.out.println(oppTeam.getCurrentPokemon().getName() + " fainted");
+            boolean switched = oppTeam.findAvailablePokemon();
+            if (switched)
+            {
+                oppRenderer.dispose();
+
+                oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), true);
+            }
+            else
+            {
+                System.out.println("no more pokemon");
+            }
+        }
 
 
 //        stateTime += Gdx.graphics.getDeltaTime();
@@ -232,8 +263,7 @@ public class Main extends ApplicationAdapter {
 //        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 //
 //
-//        TextureRegion currentFrame =
-//            animation.getKeyFrame(stateTime);
+//        TextureRegion currentFrame = animation.getKeyFrame(stateTime);
 //
 //
 //        batch.begin();

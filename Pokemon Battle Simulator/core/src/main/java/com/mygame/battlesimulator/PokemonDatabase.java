@@ -8,13 +8,14 @@ import com.badlogic.gdx.utils.JsonValue;
 
 
 public class PokemonDatabase {
-    private Array<Pokemon> allPokemon;
-    private Array<Pokemon> legendaryPokemon;
-    private Array<Pokemon> megaPokemon;
-    private Array<Pokemon> normalPokemon;
+    private JsonValue root;
 
-    public PokemonDatabase()
-    {
+    private Array<String> allPokemon;
+    private Array<String> legendaryPokemon;
+    private Array<String> megaPokemon;
+    private Array<String> normalPokemon;
+
+    public PokemonDatabase() {
         allPokemon = new Array<>();
         legendaryPokemon = new Array<>();
         megaPokemon = new Array<>();
@@ -25,60 +26,50 @@ public class PokemonDatabase {
 
     private void loadPokemon() {
         JsonReader reader = new JsonReader();
-        JsonValue root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
+        root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
 
-        for (JsonValue pokemonData = root.child; pokemonData != null; pokemonData = pokemonData.next)
-        {
-            Pokemon pokemon = new Pokemon(pokemonData);
+        for (JsonValue pokemonData = root.child; pokemonData != null; pokemonData = pokemonData.next) {
+            String id = pokemonData.name;
 
-            allPokemon.add(pokemon);
+            allPokemon.add(id);
 
-            if (pokemon.isLegendary())
-            {
-                legendaryPokemon.add(pokemon);
+            boolean legendary = pokemonData.getBoolean("legendary", false);
+            boolean canMegaEvolve = pokemonData.getBoolean("canMegaEvolve", false);
+
+            if (legendary) {
+                legendaryPokemon.add(id);
+            } else {
+                normalPokemon.add(id);
             }
-            else
-            {
-                normalPokemon.add(pokemon);
-            }
 
-            if (pokemon.canMega())
-            {
-                megaPokemon.add(pokemon);
+            if (canMegaEvolve) {
+                megaPokemon.add(id);
             }
         }
     }
 
-    public Pokemon getRandomPokemon()
-    {
-        return allPokemon.get(MathUtils.random(allPokemon.size - 1));
+    public Pokemon getPokemon(String id) {
+        return new Pokemon(root.get(id));
     }
 
-    public Pokemon getRandomLegendary()
-    {
-        return legendaryPokemon.get(MathUtils.random(legendaryPokemon.size - 1));
+    public Pokemon getRandomPokemon() {
+        String id = allPokemon.get(MathUtils.random(allPokemon.size - 1));
+        return getPokemon(id);
     }
 
-    public Pokemon getRandomMega()
-    {
-        return megaPokemon.get(MathUtils.random(megaPokemon.size - 1));
+    public Pokemon getRandomLegendary() {
+        String id = legendaryPokemon.get(MathUtils.random(legendaryPokemon.size - 1));
+        return getPokemon(id);
     }
 
-    public Pokemon getRandomNormal()
-    {
-        return normalPokemon.get(MathUtils.random(normalPokemon.size - 1));
+    public Pokemon getRandomMega() {
+        String id = megaPokemon.get(MathUtils.random(megaPokemon.size - 1));
+        return getPokemon(id);
     }
 
-    public Pokemon getPokemon(String name)
-    {
-        for (Pokemon pokemon: allPokemon)
-        {
-            if (pokemon.getName().equals(name))
-            {
-                return pokemon;
-            }
-        }
-
-        return null;
+    public Pokemon getRandomNormal() {
+        String id = normalPokemon.get(MathUtils.random(normalPokemon.size - 1));
+        return getPokemon(id);
     }
 }
+
