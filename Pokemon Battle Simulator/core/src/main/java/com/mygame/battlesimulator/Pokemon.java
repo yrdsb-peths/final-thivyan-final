@@ -28,6 +28,8 @@ public class Pokemon {
     private int height;
     private int userFrames;
     private int oppFrames;
+    private int frameDuration;
+    private float scale;
     private boolean legendary;
     private boolean canMegaEvolve;
 
@@ -183,5 +185,13 @@ public class Pokemon {
     public boolean canMega()
     {
         return canMegaEvolve;
+    }
+
+    public int getFrameDuration() {
+        return frameDuration;
+    }
+
+    public float getScale() {
+        return scale;
     }
 }
