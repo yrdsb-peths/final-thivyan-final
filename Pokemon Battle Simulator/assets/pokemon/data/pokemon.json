@@ -158,8 +158,8 @@
     },
     "moves": ["Surf", "Dark Pulse", "Ice Beam", "Air Slash"],
     "animation": {
-      "userSprite": "pokemon/sprites/greninja.png",
-      "oppSprite": "pokemon/sprites/greninja.png",
+      "userSprite": "pokemon/sprites/charizard/charizardFront.png",
+      "oppSprite": "pokemon/sprites/charizard/charizardFront.png",
       "icon": "pokemon/icons/greninja.png",
       "width": 96,
       "height": 96,

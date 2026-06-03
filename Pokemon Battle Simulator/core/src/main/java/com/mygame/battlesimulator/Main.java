@@ -7,6 +7,7 @@ package com.mygame.battlesimulator;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -15,12 +16,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.*;
 
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
 
+    private OrthographicCamera camera;
+    private Vector3 mousePosition = new Vector3();
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private PokemonRenderer playerRenderer;
@@ -52,6 +56,9 @@ public class Main extends ApplicationAdapter {
 
 //        shapeRenderer = new ShapeRenderer();
 //        batch = new SpriteBatch();
+
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/pokemon-ds-font.ttf"));
 
 
@@ -86,8 +93,7 @@ public class Main extends ApplicationAdapter {
         }
 
         Pokemon[] team2 = new Pokemon[6];
-        //team2[0] = database.getRandomMega();
-        team2[0] = database.getPokemon("rayquaza");
+        team2[0] = database.getRandomMega();
         team2[1] = database.getRandomLegendary();
         for (int i = 2; i < 6; i++) {
             team2[i] = database.getRandomPokemon();
@@ -118,6 +124,10 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
+        shapeRenderer.setProjectionMatrix(camera.combined);
+
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
         displayedPlayerHp += (playerTeam.getCurrentPokemon().getCurrentHealth()-displayedPlayerHp)*0.08f;
         displayedOppHp += (oppTeam.getCurrentPokemon().getCurrentHealth()-displayedOppHp)*0.08f;
@@ -217,8 +227,13 @@ public class Main extends ApplicationAdapter {
         if (Gdx.input.justTouched())
         {
 
-            int mouseX = Gdx.input.getX();
-            int mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+//            int mouseX = Gdx.input.getX();
+//            int mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+            mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+
+            camera.unproject(mousePosition);
+            float mouseX = mousePosition.x;
+            float mouseY = mousePosition.y;
             //startX = screenWidth/2 - 200;
             System.out.println("mouse x: " + mouseX);
             System.out.println("mouse y: " + mouseY);
@@ -254,6 +269,7 @@ public class Main extends ApplicationAdapter {
             else
             {
                 System.out.println("no more pokemon");
+
             }
         }
 
