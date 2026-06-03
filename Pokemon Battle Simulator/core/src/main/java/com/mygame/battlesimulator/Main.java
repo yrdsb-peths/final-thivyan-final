@@ -132,8 +132,8 @@ public class Main extends ApplicationAdapter {
         batch.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 80, 420);
-        drawHp(oppTeam.getCurrentPokemon(), displayedOppHp, 430, 420);
+        drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 400, 100);
+        drawHp(oppTeam.getCurrentPokemon(), displayedOppHp, 80, 400);
         shapeRenderer.end();
 
         if (Gdx.input.justTouched())
@@ -145,7 +145,17 @@ public class Main extends ApplicationAdapter {
         if (playerTeam.getCurrentPokemon().isFainted())
         {
             System.out.println(playerTeam.getCurrentPokemon().getName() + " fainted");
-            
+            boolean switched = playerTeam.findAvailablePokemon();
+            if (switched)
+            {
+                playerRenderer.dispose();
+
+                playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
+            }
+            else
+            {
+                System.out.println("no more pokemon");
+            }
         }
 
 
@@ -252,10 +262,11 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-
+        playerRenderer.dispose();
+        oppRenderer.dispose();
         shapeRenderer.dispose();
         batch.dispose();
-        sheet.dispose();
+        //sheet.dispose();
     }
 
 }
