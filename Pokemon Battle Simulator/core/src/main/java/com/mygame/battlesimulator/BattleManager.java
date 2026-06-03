@@ -15,7 +15,7 @@ public class BattleManager {
     }
 
     // Calculates the damage by a Pokemon's move
-    public int calculateDamage(Pokemon attacker, Pokemon defender, Move move)
+    public void applyMoveDamage(Pokemon attacker, Pokemon defender, Move move)
     {
 
         if (move.getCategory().equals("Physical")) {
@@ -34,7 +34,7 @@ public class BattleManager {
             damage = (int) pureDamage;
         }
 
-        return damage;
+        defender.takeDamage(damage);
     }
 
 }

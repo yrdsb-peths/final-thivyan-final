@@ -69,4 +69,16 @@ public class PokemonDatabase {
         return normalPokemon.get(MathUtils.random(normalPokemon.size - 1));
     }
 
+    public Pokemon getPokemon(String name)
+    {
+        for (Pokemon pokemon: allPokemon)
+        {
+            if (pokemon.getName().equals(name))
+            {
+                return pokemon;
+            }
+        }
+
+        return null;
+    }
 }

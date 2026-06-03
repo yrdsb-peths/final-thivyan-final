@@ -20,91 +20,23 @@ import com.badlogic.gdx.utils.*;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
-//    private SpriteBatch batch;
-//    private Texture image;
-//
-//    @Override
-//    public void create() {
-//        batch = new SpriteBatch();
-//        image = new Texture("Venusaur.png");
-//    }
-//
-//    @Override
-//    public void render() {
-//        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-//        batch.begin();
-//        batch.draw(image, 140, 210);
-//        batch.end();
-//    }
-//
-//    @Override
-//    public void dispose() {
-//        batch.dispose();
-//        image.dispose();
-//    }
+
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
+    private PokemonRenderer playerRenderer;
+    private PokemonRenderer oppRenderer;
 
     private Texture sheet;
     private Animation<TextureRegion> animation;
-
-
     private float stateTime;
     private BitmapFont font;
+
+    private double displayedPlayerHp;
+    private double displayedOppHp;
 
     @Override
     public void create() {
 
-//        JsonReader reader = new JsonReader();
-//
-//
-//        JsonValue root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
-//
-//
-//        Pokemon rayquaza = new Pokemon(root.get("rayquaza"));
-//
-//
-//        System.out.println(rayquaza.getName());
-//        System.out.println(rayquaza.getHealth());
-//        System.out.println(rayquaza.getAttack());
-//        System.out.println(rayquaza.getType1());
-
-
-//
-//
-//        // LOAD SPRITE SHEET
-//        sheet = new Texture(rayquaza.getOppSprite());
-//        int width = rayquaza.getWidth();
-//        int height = rayquaza.getHeight();
-//        int frameCount = rayquaza.getOppFrames();
-//
-//
-//        // CUT THE SHEET INTO FRAMES
-//        TextureRegion[][] temp = TextureRegion.split(sheet, width, height);
-//
-//        // venusaur 86x71, rayquaza 101x106 front: 110, 97, 100 x 89 reshiram back 108 x 83 front
-//        // STORE FRAMES
-//        Array<TextureRegion> frames = new Array<>();
-//
-//
-//        //int frameCount = 225;
-//
-//
-//        for (int row = 0; row < temp.length; row++) {
-//
-//
-//            for (int col = 0; col < temp[row].length; col++) {
-//
-//
-//                if (frames.size >= frameCount) {
-//                    break;
-//                }
-//
-//
-//                frames.add(temp[row][col]);
-//            }
-//        }
-//
 //
 //        // CREATE ANIMATION
 //        animation = new Animation<>(0.05f, frames);
@@ -133,30 +65,69 @@ public class Main extends ApplicationAdapter {
 
         PokemonDatabase database = new PokemonDatabase();
 
-        for (int x = 0; x < 2; x++) {
-            System.out.println("Team " + x);
-            Pokemon[] team = new Pokemon[6];
-            team[0] = database.getRandomMega();
-            team[1] = database.getRandomLegendary();
-            for (int i = 2; i < 6; i++) {
-                team[i] = database.getRandomPokemon();
-                if (team[i] == team[0] || team[i] == team[1] || team[i] == team[2] || team[i] == team[3] || team[i] == team[4] || team[i] == team[5]) {
-                    team[i] = database.getRandomPokemon();
-                }
-            }
 
-            Team playerTeam = new Team(team);
-            for (int i = 0; i < 6; i++) {
-                System.out.println(playerTeam.getPokemon(i).getName());
+        Pokemon[] team = new Pokemon[6];
+        //team[0] = database.getRandomMega();
+        team[0] = database.getPokemon("Reshiram");
+        team[1] = database.getRandomLegendary();
+        for (int i = 2; i < 6; i++) {
+            team[i] = database.getRandomPokemon();
+            if (team[i] == team[0] || team[i] == team[1] || team[i] == team[2] || team[i] == team[3] || team[i] == team[4] || team[i] == team[5]) {
+                team[i] = database.getRandomPokemon();
             }
-            //System.out.println()
         }
+
+        Team playerTeam = new Team(team);
+        for (int i = 0; i < 6; i++) {
+            System.out.println(playerTeam.getPokemon(i).getName());
+        }
+
+        Pokemon[] team2 = new Pokemon[6];
+        //team2[0] = database.getRandomMega();
+        team2[0] = database.getPokemon("Rayquaza");
+        team2[1] = database.getRandomLegendary();
+        for (int i = 2; i < 6; i++) {
+            team2[i] = database.getRandomPokemon();
+            if (team2[i] == team2[0] || team2[i] == team2[1] || team2[i] == team2[2] || team2[i] == team2[3] || team2[i] == team2[4] || team2[i] == team2[5]) {
+                team2[i] = database.getRandomPokemon();
+            }
+        }
+
+        Team oppTeam = new Team(team2);
+        for (int i = 0; i < 6; i++) {
+            System.out.println(oppTeam.getPokemon(i).getName());
+        }
+
+
+            //System.out.println()
+        batch = new SpriteBatch();
+        playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
+        oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), false);
+
+        displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
+        displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
         //System.out.println("awrnoawt");
     }
 
 
     @Override
     public void render() {
+        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+        //displayedPlayerHp += ()
+        float delta = Gdx.graphics.getDeltaTime();
+
+        playerRenderer.update(delta);
+        oppRenderer.update(delta);
+
+        batch.begin();
+
+        playerRenderer.draw(batch, 110, 80);
+        oppRenderer.draw(batch, 370, 250);
+
+        batch.end();
+
+        
+
 //        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
 //        JsonReader reader = new JsonReader();
 //
@@ -244,6 +215,19 @@ public class Main extends ApplicationAdapter {
 
     }
 
+    private drawHp (Pokemon pokemon, float displayedHp, float x, float y)
+    {
+        float maxWidth = 200;
+        float height = 18;
+
+        float hpPercent = displayedHp/pokemon.getHealth();
+
+        shapeRenderer.setColor(Color.DARK_GRAY);
+        shapeRenderer.rect(x, y, maxWidth, height);
+
+        shapeRenderer.setColor(Color.GREEN);
+        shapeRenderer.rect(x, y, maxWidth*hpPercent, height);
+    }
 
     @Override
     public void dispose() {

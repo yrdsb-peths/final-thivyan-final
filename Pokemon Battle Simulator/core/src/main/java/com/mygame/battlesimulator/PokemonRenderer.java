@@ -32,6 +32,8 @@ public class PokemonRenderer {
 
         sheet = new Texture(spritePath);
 
+        sheet.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+
         TextureRegion[][] grid = TextureRegion.split(sheet, pokemon.getWidth(), pokemon.getHeight());
 
         Array<TextureRegion> frames = new Array<>();

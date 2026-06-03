@@ -13,7 +13,7 @@ import com.badlogic.gdx.Gdx;
 public class Pokemon {
     private String name;
     private int health;
-    private int currentHealth = health;
+    private int currentHealth;
     private int attack;
     private int defense;
     private int specialAttack;
@@ -28,7 +28,6 @@ public class Pokemon {
     private int height;
     private int userFrames;
     private int oppFrames;
-    private int frameDuration;
     private float scale;
     private boolean legendary;
     private boolean canMegaEvolve;
@@ -67,6 +66,7 @@ public class Pokemon {
         this.name = data.getString("name");
 
         this.health = data.get("stats").getInt("hp");
+        this.currentHealth = this.health;
         this.attack = data.get("stats").getInt("attack");
         this.defense = data.get("stats").getInt("defense");
         this.specialAttack = data.get("stats").getInt("specialAttack");
@@ -82,6 +82,7 @@ public class Pokemon {
         this.height = data.get("animation").getInt("height");;
         this.userFrames = data.get("animation").getInt("userFrames");;
         this.oppFrames = data.get("animation").getInt("oppFrames");;
+        this.scale = data.get("animation").getInt("scale");
 
         //JsonValue movesData = data.get("moves");
         this.moves = new String[data.get("moves").size];
@@ -104,8 +105,9 @@ public class Pokemon {
         }
     }
 
-    public void faint()
+    public boolean isFainted()
     {
+        return currentHealth <= 0;
         //switchPokemon();
     }
 
@@ -116,6 +118,11 @@ public class Pokemon {
     public int getHealth() {
         return health;
     }
+
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
 
     public void setHealth(int health) {
         this.health = health;
@@ -185,10 +192,6 @@ public class Pokemon {
     public boolean canMega()
     {
         return canMegaEvolve;
-    }
-
-    public int getFrameDuration() {
-        return frameDuration;
     }
 
     public float getScale() {
