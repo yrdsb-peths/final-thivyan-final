@@ -132,18 +132,24 @@ public class Main extends ApplicationAdapter {
 //        generator.dispose();
 
         PokemonDatabase database = new PokemonDatabase();
-        Pokemon[] team = new Pokemon[6];
-        team[0] = database.getRandomMega();
-        team[1] = database.getRandomLegendary();
-        for (int i = 0; i < 4; i++)
-        {
-            team[i] = database.getRandomPokemon();
-        }
 
-        Team playerTeam = new Team(team);
-        for (int i = 0; i < 6; i++)
-        {
-            System.out.println(team[i]);
+        for (int x = 0; x < 2; x++) {
+            System.out.println("Team " + x);
+            Pokemon[] team = new Pokemon[6];
+            team[0] = database.getRandomMega();
+            team[1] = database.getRandomLegendary();
+            for (int i = 2; i < 6; i++) {
+                team[i] = database.getRandomPokemon();
+                if (team[i] == team[0] || team[i] == team[1] || team[i] == team[2] || team[i] == team[3] || team[i] == team[4] || team[i] == team[5]) {
+                    team[i] = database.getRandomPokemon();
+                }
+            }
+
+            Team playerTeam = new Team(team);
+            for (int i = 0; i < 6; i++) {
+                System.out.println(playerTeam.getPokemon(i).getName());
+            }
+            //System.out.println()
         }
         //System.out.println("awrnoawt");
     }

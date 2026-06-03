@@ -12,7 +12,7 @@ public class Team {
     }
 
     // Gets the current pokemon
-    public Pokemon getActivepokemon()
+    public Pokemon getCurrentPokemon()
     {
         return pokemon[currentIndex];
     }
