@@ -29,6 +29,20 @@ public class Team {
         currentIndex = newIndex;
     }
 
+    public boolean findAvailablePokemon()
+    {
+        for (int i = 0; i < pokemon.length; i++)
+        {
+            if (!pokemon[i].isFainted())
+            {
+                currentIndex = i;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 //    public boolean allFainted()
 //    {
 //        //

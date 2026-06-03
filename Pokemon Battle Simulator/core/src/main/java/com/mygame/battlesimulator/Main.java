@@ -31,8 +31,10 @@ public class Main extends ApplicationAdapter {
     private float stateTime;
     private BitmapFont font;
 
-    private double displayedPlayerHp;
-    private double displayedOppHp;
+    private Team playerTeam;
+    private Team oppTeam;
+    private float displayedPlayerHp;
+    private float displayedOppHp;
 
     @Override
     public void create() {
@@ -77,7 +79,7 @@ public class Main extends ApplicationAdapter {
             }
         }
 
-        Team playerTeam = new Team(team);
+        playerTeam = new Team(team);
         for (int i = 0; i < 6; i++) {
             System.out.println(playerTeam.getPokemon(i).getName());
         }
@@ -93,7 +95,7 @@ public class Main extends ApplicationAdapter {
             }
         }
 
-        Team oppTeam = new Team(team2);
+        oppTeam = new Team(team2);
         for (int i = 0; i < 6; i++) {
             System.out.println(oppTeam.getPokemon(i).getName());
         }
@@ -104,6 +106,8 @@ public class Main extends ApplicationAdapter {
         playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
         oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), false);
 
+        shapeRenderer = new ShapeRenderer();
+
         displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
         displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
         //System.out.println("awrnoawt");
@@ -113,7 +117,8 @@ public class Main extends ApplicationAdapter {
     @Override
     public void render() {
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        //displayedPlayerHp += ()
+        displayedPlayerHp += (playerTeam.getCurrentPokemon().getCurrentHealth()-displayedPlayerHp)*0.08f;
+        displayedOppHp += (oppTeam.getCurrentPokemon().getCurrentHealth()-displayedOppHp)*0.08f;
         float delta = Gdx.graphics.getDeltaTime();
 
         playerRenderer.update(delta);
@@ -126,7 +131,23 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
 
-        
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 80, 420);
+        drawHp(oppTeam.getCurrentPokemon(), displayedOppHp, 430, 420);
+        shapeRenderer.end();
+
+        if (Gdx.input.justTouched())
+        {
+            playerTeam.getCurrentPokemon().takeDamage(50);
+            System.out.println(playerTeam.getCurrentPokemon().getCurrentHealth());
+        }
+
+        if (playerTeam.getCurrentPokemon().isFainted())
+        {
+            System.out.println(playerTeam.getCurrentPokemon().getName() + " fainted");
+            
+        }
+
 
 //        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
 //        JsonReader reader = new JsonReader();
@@ -215,7 +236,7 @@ public class Main extends ApplicationAdapter {
 
     }
 
-    private drawHp (Pokemon pokemon, float displayedHp, float x, float y)
+    public void drawHp (Pokemon pokemon, float displayedHp, float x, float y)
     {
         float maxWidth = 200;
         float height = 18;
