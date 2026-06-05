@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.*;
 
@@ -126,7 +127,7 @@ public class Main extends ApplicationAdapter {
         displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
         displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
         //System.out.println("awrnoawt");
-        battleState = "CHOOSING";
+        battleState = "PLAYER";
     }
 
 
@@ -135,35 +136,36 @@ public class Main extends ApplicationAdapter {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
+        JsonReader reader = new JsonReader();
+        JsonValue root = reader.parse(Gdx.files.internal("pokemon/data/pokemon.json"));
+        JsonValue movesRoot = reader.parse(Gdx.files.internal("pokemon/data/moves.Json"));
 
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        displayedPlayerHp += (playerTeam.getCurrentPokemon().getCurrentHealth()-displayedPlayerHp)*0.08f;
-        displayedOppHp += (oppTeam.getCurrentPokemon().getCurrentHealth()-displayedOppHp)*0.08f;
-        float delta = Gdx.graphics.getDeltaTime();
+        if (!battleState.equals("GAME OVER")) {
+            displayedPlayerHp += (playerTeam.getCurrentPokemon().getCurrentHealth() - displayedPlayerHp) * 0.08f;
+            displayedOppHp += (oppTeam.getCurrentPokemon().getCurrentHealth() - displayedOppHp) * 0.08f;
+            float delta = Gdx.graphics.getDeltaTime();
 
-        playerRenderer.update(delta);
-        oppRenderer.update(delta);
+            playerRenderer.update(delta);
+            oppRenderer.update(delta);
 
-        batch.begin();
+            batch.begin();
 
-        playerRenderer.draw(batch, 110, 80);
-        oppRenderer.draw(batch, 370, 250);
+            playerRenderer.draw(batch, 110, 80);
+            oppRenderer.draw(batch, 370, 250);
 
-        batch.end();
+            batch.end();
 
-        // health bar
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 400, 200);
-        drawHp(oppTeam.getCurrentPokemon(), displayedOppHp, 80, 400);
-        shapeRenderer.end();
+            // health bar
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 400, 200);
+            drawHp(oppTeam.getCurrentPokemon(), displayedOppHp, 80, 400);
+            shapeRenderer.end();
 
+        }
 
-        if (battleState.equals("CHOOSING")) {
-            JsonReader reader = new JsonReader();
+        if (battleState.equals("PLAYER")) {
 
-
-            JsonValue root = reader.parse(Gdx.files.internal("pokemon/data/pokemon.json"));
-            JsonValue movesRoot = reader.parse(Gdx.files.internal("pokemon/data/moves.Json"));
 
             //System.out.println(reshiram.getName());
 
@@ -258,7 +260,7 @@ public class Main extends ApplicationAdapter {
                         visibleBattleText = "";
                         lettersShown = 0;
                         typingTimer = 0f;
-                        battleState = "FIGHTING";
+                        battleState = "PLAYER_WAITING";
                     }
                 }
             }
@@ -272,11 +274,11 @@ public class Main extends ApplicationAdapter {
                     oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), false);
                 } else {
                     System.out.println("no more pokemon");
-
+                    battleState = "GAME OVER";
                 }
             }
         }
-        else
+        else if (battleState.equals("PLAYER_WAITING") || battleState.equals("OPP_WAITING"))
         {
             typingTimer += Gdx.graphics.getDeltaTime();
 
@@ -286,13 +288,106 @@ public class Main extends ApplicationAdapter {
                 visibleBattleText = battleText.substring(0, lettersShown);
                 typingTimer = 0f;
             }
+
             batch.begin();
             font.draw(batch, visibleBattleText, 40, 100);
             batch.end();
+
             if (visibleBattleText.equals(battleText)) {
-                battleState = "CHOOSING";
+                if (battleState.equals("PLAYER_WAITING"))
+                {
+                    battleState = "OPPONENT";
+                }
+                else
+                {
+                    battleState = "PLAYER";
+                }
             }
 
+        }
+        else if (battleState.equals("OPPONENT"))
+        {
+            String[] moves = oppTeam.getCurrentPokemon().getMoves();
+            String moveName = moves[MathUtils.random(0, 3)];
+            JsonValue moveData = movesRoot.get(moveName);
+            Move move = new Move(moveName, moveData);
+
+            battle.applyMoveDamage(oppTeam.getCurrentPokemon(), playerTeam.getCurrentPokemon(), move);
+            battleText = oppTeam.getCurrentPokemon().getName() + " used " + move.getName() + "!       ";
+            visibleBattleText = "";
+            lettersShown = 0;
+            typingTimer = 0f;
+            battleState = "OPP_WAITING";
+
+            if (playerTeam.getCurrentPokemon().isFainted()) {
+                System.out.println(playerTeam.getCurrentPokemon().getName() + " fainted");
+                boolean switched = playerTeam.findAvailablePokemon();
+                if (switched) {
+                    playerRenderer.dispose();
+
+                    playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), false);
+                } else {
+                    System.out.println("no more pokemon");
+                    battleState = "GAME OVER";
+                }
+            }
+
+        }
+        else if (battleState.equals("GAME OVER"))
+        {
+            batch.begin();
+            font.draw(batch, "Click to play again", 250, 250);
+            batch.end();
+
+            if (Gdx.input.justTouched())
+            {
+                dispose();
+                PokemonDatabase database = new PokemonDatabase();
+                Pokemon[] team = new Pokemon[6];
+                //team[0] = database.getRandomMega();
+                team[0] = database.getPokemon("reshiram");
+                team[1] = database.getRandomLegendary();
+                for (int i = 2; i < 6; i++) {
+                    team[i] = database.getRandomPokemon();
+                    if (team[i] == team[0] || team[i] == team[1] || team[i] == team[2] || team[i] == team[3] || team[i] == team[4] || team[i] == team[5]) {
+                        team[i] = database.getRandomPokemon();
+                    }
+                }
+
+                playerTeam = new Team(team);
+                for (int i = 0; i < 6; i++) {
+                    System.out.println(playerTeam.getPokemon(i).getName());
+                }
+
+                Pokemon[] team2 = new Pokemon[6];
+                team2[0] = database.getRandomMega();
+                team2[1] = database.getRandomLegendary();
+                for (int i = 2; i < 6; i++) {
+                    team2[i] = database.getRandomPokemon();
+                    if (team2[i] == team2[0] || team2[i] == team2[1] || team2[i] == team2[2] || team2[i] == team2[3] || team2[i] == team2[4] || team2[i] == team2[5]) {
+                        team2[i] = database.getRandomPokemon();
+                    }
+                }
+
+                oppTeam = new Team(team2);
+                for (int i = 0; i < 6; i++) {
+                    System.out.println(oppTeam.getPokemon(i).getName());
+                }
+
+
+                //System.out.println()
+                battle = new BattleManager();
+                batch = new SpriteBatch();
+                playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
+                oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), false);
+
+                shapeRenderer = new ShapeRenderer();
+
+                displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
+                displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
+                //System.out.println("awrnoawt");
+                battleState = "PLAYER";
+            }
         }
 
 
