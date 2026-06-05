@@ -72,7 +72,7 @@ public class PokemonRenderer {
     public void draw(SpriteBatch batch, double x, double y, boolean playerSide)
     {
         TextureRegion currentFrame = animation.getKeyFrame((float) stateTime);
-        if (playerside)
+        if (playerSide)
         {
             batch.draw(currentFrame, (float) x, (float) y, pokemon.getUserWidth() * pokemon.getScale(), pokemon.getUserHeight() * pokemon.getScale());
         }

@@ -181,14 +181,14 @@
       "oppSprite": "pokemon/sprites/darkrai/darkraiFront.png",
       "icon": "pokemon/sprites/darkrai.png",
 
-      "userWidth": 96,
-      "userHeight": 96,
+      "userWidth": 91,
+      "userHeight": 87,
 
       "oppWidth": 96,
-      "oppHeight": 96,
+      "oppHeight": 86,
 
-      "userFrames": 45,
-      "oppFrames": 45,
+      "userFrames": 143,
+      "oppFrames": 143,
 
       "scale": 2.2
     },

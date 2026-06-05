@@ -85,8 +85,8 @@ public class Main extends ApplicationAdapter {
 
 
         Pokemon[] team = new Pokemon[6];
-        //team[0] = database.getRandomMega();
-        team[0] = database.getPokemon("reshiram");
+        team[0] = database.getRandomMega();
+        //team[0] = database.getPokemon("reshiram");
         team[1] = database.getRandomLegendary();
         for (int i = 2; i < 6; i++) {
             team[i] = database.getRandomPokemon();
@@ -151,8 +151,8 @@ public class Main extends ApplicationAdapter {
 
             batch.begin();
 
-            playerRenderer.draw(batch, 110, 80);
-            oppRenderer.draw(batch, 370, 250);
+            playerRenderer.draw(batch, 110, 80, true);
+            oppRenderer.draw(batch, 370, 250, false);
 
             batch.end();
 
