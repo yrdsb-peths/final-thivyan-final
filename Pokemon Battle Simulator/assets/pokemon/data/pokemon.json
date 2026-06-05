@@ -194,6 +194,206 @@
     },
 
     "canMegaEvolve": false
-  }
+  },
+
+  "lucario": {
+    "name": "Lucario",
+
+    "type1": "Fighting",
+    "type2": "Steel",
+
+    "legendary": false,
+
+    "stats": {
+      "hp": 344,
+      "attack": 350,
+      "defense": 262,
+      "specialAttack": 361,
+      "specialDefense": 262,
+      "speed": 306
+    },
+
+    "moves": ["Aura Sphere", "Close Combat", "Flash Cannon", "Dark Pulse"],
+
+    "animation": {
+      "userSprite": "pokemon/sprites/lucario/lucarioBack.png",
+      "oppSprite": "pokemon/sprites/lucario/lucarioFront.png",
+      "icon": "pokemon/sprites/lucario/lucario.png",
+
+      "userWidth": 49,
+      "userHeight": 65,
+
+      "oppWidth": 48,
+      "oppHeight": 63,
+
+      "userFrames": 143,
+      "oppFrames": 143,
+
+      "scale": 2.0
+    },
+
+    "canMegaEvolve": true,
+    "megaId": "mega_lucario"
+  },
+
+  "electivire": {
+    "name": "Electivire",
+
+    "type1": "Electric",
+    "type2": "",
+
+    "legendary": false,
+
+    "stats": {
+      "hp": 354,
+      "attack": 379,
+      "defense": 273,
+      "specialAttack": 317,
+      "specialDefense": 295,
+      "speed": 289
+    },
+
+    "moves": ["Thunderbolt", "Ice Punch", "Earthquake", "Brick Break"],
+
+    "animation": {
+      "userSprite": "pokemon/sprites/electivire/electivireBack.png",
+      "oppSprite": "pokemon/sprites/electivire/electivireFront.png",
+      "icon": "pokemon/sprites/electivire/electivire.png",
+
+      "userWidth": 102,
+      "userHeight": 85,
+
+      "oppWidth": 96,
+      "oppHeight": 85,
+
+      "userFrames": 103,
+      "oppFrames": 103,
+
+      "scale": 2.2
+    },
+
+    "canMegaEvolve": false
+  },
+
+  "scizor": {
+    "name": "Scizor",
+
+    "type1": "Bug",
+    "type2": "Steel",
+
+    "legendary": false,
+
+    "stats": {
+      "hp": 344,
+      "attack": 394,
+      "defense": 328,
+      "specialAttack": 229,
+      "specialDefense": 284,
+      "speed": 251
+    },
+
+    "moves": ["X-Scissor", "Bullet Punch", "Brick Break", "Iron Head"],
+
+    "animation": {
+      "userSprite": "pokemon/sprites/scizor/scizorBack.png",
+      "oppSprite": "pokemon/sprites/scizor/scizorFront.png",
+      "icon": "pokemon/sprites/scizor/scizor.png",
+
+      "userWidth": 68,
+      "userHeight": 75,
+
+      "oppWidth": 75,
+      "oppHeight": 73,
+
+      "userFrames": 105,
+      "oppFrames": 105,
+
+      "scale": 2.1
+    },
+
+    "canMegaEvolve": true,
+    "megaId": "mega_scizor"
+  },
+
+  "haxorus": {
+    "name": "Haxorus",
+
+    "type1": "Dragon",
+    "type2": "",
+
+    "legendary": false,
+
+    "stats": {
+      "hp": 352,
+      "attack": 432,
+      "defense": 306,
+      "specialAttack": 240,
+      "specialDefense": 262,
+      "speed": 317
+    },
+
+    "moves": ["Dragon Claw", "Earthquake", "Brick Break", "X-Scissor"],
+
+    "animation": {
+      "userSprite": "pokemon/sprites/haxorus/haxorusBack.png",
+      "oppSprite": "pokemon/sprites/haxorus/haxorusFront.png",
+      "icon": "pokemon/sprites/haxorus/haxorus.png",
+
+      "userWidth": 91,
+      "userHeight": 87,
+
+      "oppWidth": 70,
+      "oppHeight": 84,
+
+      "userFrames": 185,
+      "oppFrames": 182,
+
+      "scale": 2.3
+    },
+
+    "canMegaEvolve": false
+  },
+
+  "hydreigon": {
+    "name": "Hydreigon",
+
+    "type1": "Dark",
+    "type2": "Dragon",
+
+    "legendary": false,
+
+    "stats": {
+      "hp": 386,
+      "attack": 339,
+      "defense": 306,
+      "specialAttack": 383,
+      "specialDefense": 306,
+      "speed": 324
+    },
+
+    "moves": ["Dark Pulse", "Dragon Pulse", "Flamethrower", "Air Slash"],
+
+    "animation": {
+      "userSprite": "pokemon/sprites/hydreigon/hydreigonBack.png",
+      "oppSprite": "pokemon/sprites/hydreigon/hydreigonFront.png",
+      "icon": "pokemon/sprites/hydreigon/hydreigon.png",
+
+      "userWidth": 84,
+      "userHeight": 111,
+
+      "oppWidth": 91,
+      "oppHeight": 107,
+
+      "userFrames": 75,
+      "oppFrames": 75,
+
+      "scale": 2.4
+    },
+
+    "canMegaEvolve": false
+  },
+
+
+
 }
 

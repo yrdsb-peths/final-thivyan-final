@@ -325,7 +325,7 @@ public class Main extends ApplicationAdapter {
                 if (switched) {
                     playerRenderer.dispose();
 
-                    playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), false);
+                    playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
                 } else {
                     System.out.println("no more pokemon");
                     battleState = "GAME OVER";

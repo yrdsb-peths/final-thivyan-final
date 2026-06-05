@@ -266,5 +266,174 @@
     "power": 150,
     "accuracy": 90,
     "pp": 5
+  },
+
+  "Bullet Punch": {
+    "type": "Steel",
+    "category": "Physical",
+    "power": 40,
+    "accuracy": 100,
+    "pp": 30
+  },
+
+
+  "Brick Break": {
+    "type": "Fighting",
+    "category": "Physical",
+    "power": 75,
+    "accuracy": 100,
+    "pp": 15
+  },
+
+
+  "Dragon Pulse": {
+    "type": "Dragon",
+    "category": "Special",
+    "power": 85,
+    "accuracy": 100,
+    "pp": 10
+  },
+
+
+  "Poison Jab": {
+    "type": "Poison",
+    "category": "Physical",
+    "power": 80,
+    "accuracy": 100,
+    "pp": 20
+  },
+
+
+  "Sludge Bomb": {
+    "type": "Poison",
+    "category": "Special",
+    "power": 90,
+    "accuracy": 100,
+    "pp": 10
+  },
+
+
+  "Waterfall": {
+    "type": "Water",
+    "category": "Physical",
+    "power": 80,
+    "accuracy": 100,
+    "pp": 15
+  },
+
+
+  "Wild Charge": {
+    "type": "Electric",
+    "category": "Physical",
+    "power": 90,
+    "accuracy": 100,
+    "pp": 15
+  },
+
+
+  "Flare Blitz": {
+    "type": "Fire",
+    "category": "Physical",
+    "power": 120,
+    "accuracy": 100,
+    "pp": 15
+  },
+
+
+  "Solar Beam": {
+    "type": "Grass",
+    "category": "Special",
+    "power": 120,
+    "accuracy": 100,
+    "pp": 10
+  },
+
+
+  "Dragon Dance": {
+    "type": "Dragon",
+    "category": "Status",
+    "power": 0,
+    "accuracy": 100,
+    "pp": 20
+  },
+
+
+  "Thunder Punch": {
+    "type": "Electric",
+    "category": "Physical",
+    "power": 75,
+    "accuracy": 100,
+    "pp": 15
+  },
+
+
+  "Ice Punch": {
+    "type": "Ice",
+    "category": "Physical",
+    "power": 75,
+    "accuracy": 100,
+    "pp": 15
+  },
+
+
+  "Fire Punch": {
+    "type": "Fire",
+    "category": "Physical",
+    "power": 75,
+    "accuracy": 100,
+    "pp": 15
+  },
+
+
+  "Sludge Wave": {
+    "type": "Poison",
+    "category": "Special",
+    "power": 95,
+    "accuracy": 100,
+    "pp": 10
+  },
+
+
+  "Night Slash": {
+    "type": "Dark",
+    "category": "Physical",
+    "power": 70,
+    "accuracy": 100,
+    "pp": 15
+  },
+
+
+  "Aerial Ace": {
+    "type": "Flying",
+    "category": "Physical",
+    "power": 60,
+    "accuracy": 100,
+    "pp": 20
+  },
+
+  "Meteor Mash": {
+    "type": "Steel",
+    "category": "Physical",
+    "power": 90,
+    "accuracy": 90,
+    "pp": 10
+  },
+
+
+  "Earth Power": {
+    "type": "Ground",
+    "category": "Special",
+    "power": 90,
+    "accuracy": 100,
+    "pp": 10
+  },
+
+
+  "Steel Wing": {
+    "type": "Steel",
+    "category": "Physical",
+    "power": 70,
+    "accuracy": 90,
+    "pp": 25
   }
 }
