@@ -16,6 +16,8 @@ public class BattleScreen {
         batch.draw(background, 0, 0, 1280, 720);
     }
 
+
+
     public String findColour(String type)
     {
         if (type.equals("Normal")){

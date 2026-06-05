@@ -393,7 +393,253 @@
     "canMegaEvolve": false
   },
 
+  "metagross": {
+    "name": "Metagross",
 
 
+    "type1": "Steel",
+    "type2": "Psychic",
+
+
+    "legendary": false,
+
+
+    "stats": {
+      "hp": 364,
+      "attack": 405,
+      "defense": 394,
+      "specialAttack": 317,
+      "specialDefense": 306,
+      "speed": 262
+    },
+
+
+    "moves": ["Meteor Mash", "Zen Headbutt", "Earthquake", "Bullet Punch"],
+
+
+    "animation": {
+      "userSprite": "pokemon/sprites/metagross/metagrossBack.png",
+      "oppSprite": "pokemon/sprites/metagross/metagrossFront.png",
+      "icon": "pokemon/sprites/metagross/metagross.png",
+
+
+      "userWidth": 82,
+      "userHeight": 55,
+
+
+      "oppWidth": 83,
+      "oppHeight": 57,
+
+
+      "userFrames": 103,
+      "oppFrames": 105,
+
+
+      "scale": 2.4
+    },
+
+
+    "canMegaEvolve": true,
+    "megaId": "mega_metagross"
+  },
+
+
+  "kyurem": {
+    "name": "Kyurem",
+
+
+    "type1": "Dragon",
+    "type2": "Ice",
+
+
+    "legendary": true,
+
+
+    "stats": {
+      "hp": 416,
+      "attack": 394,
+      "defense": 306,
+      "specialAttack": 394,
+      "specialDefense": 306,
+      "speed": 289
+    },
+
+
+    "moves": ["Draco Meteor", "Dragon Claw", "Ice Beam", "Earth Power"],
+
+
+    "animation": {
+      "userSprite": "pokemon/sprites/kyurem/kyuremBack.png",
+      "oppSprite": "pokemon/sprites/kyurem/kyuremFront.png",
+      "icon": "pokemon/sprites/kyurem/kyurem.png",
+
+
+      "userWidth": 80,
+      "userHeight": 71,
+
+
+      "oppWidth": 99,
+      "oppHeight": 76,
+
+
+      "userFrames": 113,
+      "oppFrames": 113,
+
+
+      "scale": 2.6
+    },
+
+
+    "canMegaEvolve": false
+  },
+
+
+  "skarmory": {
+    "name": "Skarmory",
+
+
+    "type1": "Steel",
+    "type2": "Flying",
+
+
+    "legendary": false,
+
+
+    "stats": {
+      "hp": 334,
+      "attack": 262,
+      "defense": 416,
+      "specialAttack": 196,
+      "specialDefense": 262,
+      "speed": 262
+    },
+
+
+    "moves": ["Brave Bird", "Steel Wing", "Iron Head", "Aerial Ace"],
+
+
+    "animation": {
+      "userSprite": "pokemon/sprites/skarmory/skarmoryBack.png",
+      "oppSprite": "pokemon/sprites/skarmory/skarmoryFront.png",
+      "icon": "pokemon/sprites/skarmory/skarmory.png",
+
+
+      "userWidth": 85,
+      "userHeight": 68,
+
+
+      "oppWidth": 70,
+      "oppHeight": 70,
+
+
+      "userFrames": 112,
+      "oppFrames": 96,
+
+
+      "scale": 2.1
+    },
+
+
+    "canMegaEvolve": false
+  },
+
+
+  "lapras": {
+    "name": "Lapras",
+
+
+    "type1": "Water",
+    "type2": "Ice",
+
+
+    "legendary": false,
+
+
+    "stats": {
+      "hp": 464,
+      "attack": 295,
+      "defense": 284,
+      "specialAttack": 295,
+      "specialDefense": 350,
+      "speed": 240
+    },
+
+
+    "moves": ["Surf", "Ice Beam", "Thunderbolt", "Psychic"],
+
+
+    "animation": {
+      "userSprite": "pokemon/sprites/lapras/laprasBack.png",
+      "oppSprite": "pokemon/sprites/lapras/laprasFront.png",
+      "icon": "pokemon/sprites/lapras/lapras.png",
+
+
+      "userWidth": 76,
+      "userHeight": 71,
+
+
+      "oppWidth": 68,
+      "oppHeight": 71,
+
+
+      "userFrames": 65,
+      "oppFrames": 65,
+
+
+      "scale": 2.5
+    },
+
+
+    "canMegaEvolve": false
+  },
+
+  "ninetales": {
+    "name": "Ninetales",
+
+
+    "type1": "Fire",
+    "type2": "",
+
+
+    "legendary": false,
+
+
+    "stats": {
+      "hp": 350,
+      "attack": 251,
+      "defense": 273,
+      "specialAttack": 295,
+      "specialDefense": 328,
+      "speed": 328
+    },
+
+
+    "moves": ["Flamethrower", "Fire Blast", "Dark Pulse", "Energy Ball"],
+
+
+    "animation": {
+      "userSprite": "pokemon/sprites/ninetales/ninetalesBack.png",
+      "oppSprite": "pokemon/sprites/ninetales/ninetalesFront.png",
+      "icon": "pokemon/sprites/ninetales/ninetales.png",
+
+
+      "userWidth": 76,
+      "userHeight": 64,
+
+
+      "oppWidth": 76,
+      "oppHeight": 73,
+
+
+      "userFrames": 107,
+      "oppFrames": 53,
+
+
+      "scale": 2.0
+    },
+
+
+    "canMegaEvolve": false
+  }
 }
 
