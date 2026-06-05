@@ -24,8 +24,10 @@ public class Pokemon {
     private String userSprite;
     private String oppSprite;
     private String[] moves;
-    private int width;
-    private int height;
+    private int userWidth;
+    private int userHeight;
+    private int oppWidth;
+    private int oppHeight;
     private int userFrames;
     private int oppFrames;
     private float scale;
@@ -78,10 +80,12 @@ public class Pokemon {
         //JsonValue animation = data.get("animation");
         this.userSprite = data.get("animation").getString("userSprite");
         this.oppSprite = data.get("animation").getString("oppSprite");
-        this.width = data.get("animation").getInt("width");;
-        this.height = data.get("animation").getInt("height");;
-        this.userFrames = data.get("animation").getInt("userFrames");;
-        this.oppFrames = data.get("animation").getInt("oppFrames");;
+        this.userWidth = data.get("animation").getInt("userWidth");
+        this.userHeight = data.get("animation").getInt("userHeight");
+        this.oppWidth = data.get("animation").getInt("oppWidth");
+        this.oppHeight = data.get("animation").getInt("oppHeight");
+        this.userFrames = data.get("animation").getInt("userFrames");
+        this.oppFrames = data.get("animation").getInt("oppFrames");
         this.scale = data.get("animation").getInt("scale");
 
         //JsonValue movesData = data.get("moves");
@@ -164,12 +168,20 @@ public class Pokemon {
         return oppSprite;
     }
 
-    public int getWidth() {
-        return width;
+    public int getUserWidth() {
+        return userWidth;
     }
 
-    public int getHeight() {
-        return height;
+    public int getUserHeight() {
+        return userHeight;
+    }
+
+    public int getOppWidth() {
+        return oppWidth;
+    }
+
+    public int getOppHeight() {
+        return oppHeight;
     }
 
     public int getUserFrames() {

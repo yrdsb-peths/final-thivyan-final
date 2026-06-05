@@ -18,6 +18,7 @@ public class PokemonRenderer {
 
         String spritePath;
         int frameCount;
+        TextureRegion[][] grid;
 
         if (playerSide)
         {
@@ -34,7 +35,15 @@ public class PokemonRenderer {
 
         sheet.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 
-        TextureRegion[][] grid = TextureRegion.split(sheet, pokemon.getWidth(), pokemon.getHeight());
+        if (playerSide)
+        {
+            grid = TextureRegion.split(sheet, pokemon.getUserWidth(), pokemon.getUserHeight());
+        }
+        else
+        {
+            grid = TextureRegion.split(sheet, pokemon.getOppWidth(), pokemon.getOppHeight());
+        }
+
 
         Array<TextureRegion> frames = new Array<>();
 
@@ -60,11 +69,18 @@ public class PokemonRenderer {
         stateTime += delta;
     }
 
-    public void draw(SpriteBatch batch, double x, double y)
+    public void draw(SpriteBatch batch, double x, double y, boolean playerSide)
     {
         TextureRegion currentFrame = animation.getKeyFrame((float) stateTime);
+        if (playerside)
+        {
+            batch.draw(currentFrame, (float) x, (float) y, pokemon.getUserWidth() * pokemon.getScale(), pokemon.getUserHeight() * pokemon.getScale());
+        }
+        else
+        {
+            batch.draw(currentFrame, (float) x, (float) y, pokemon.getOppWidth() * pokemon.getScale(), pokemon.getOppHeight() * pokemon.getScale());
+        }
 
-        batch.draw(currentFrame, (float) x, (float) y, pokemon.getWidth() * pokemon.getScale(), pokemon.getHeight() * pokemon.getScale());
     }
 
     public void dispose()
