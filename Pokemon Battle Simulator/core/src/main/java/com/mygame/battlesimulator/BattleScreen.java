@@ -77,7 +77,7 @@ public class BattleScreen {
         }
         else if (type.equals("Dragon"))
         {
-            return "6a7baf";
+            return "053976";
         }
         else if (type.equals("Dark"))
         {

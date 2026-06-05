@@ -139,6 +139,7 @@ public class Main extends ApplicationAdapter {
         JsonReader reader = new JsonReader();
         JsonValue root = reader.parse(Gdx.files.internal("pokemon/data/pokemon.json"));
         JsonValue movesRoot = reader.parse(Gdx.files.internal("pokemon/data/moves.Json"));
+        JsonValue typesRoot = reader.parse(Gdx.files.internal("pokemon/data/types.Json"));
 
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
         if (!battleState.equals("GAME OVER")) {
@@ -253,8 +254,10 @@ public class Main extends ApplicationAdapter {
                         String moveName = moves[i];
                         JsonValue moveData = movesRoot.get(moveName);
                         Move move = new Move(moveName, moveData);
+                        JsonValue typesData = typesRoot.get(move.getType());
+                        TypeChart type = new TypeChart(move.getType(), typesData);
 
-                        battle.applyMoveDamage(playerTeam.getCurrentPokemon(), oppTeam.getCurrentPokemon(), move);
+                        battle.applyMoveDamage(playerTeam.getCurrentPokemon(), oppTeam.getCurrentPokemon(), move, type);
 
                         battleText = playerTeam.getCurrentPokemon().getName() + " used " + move.getName() + "!       ";
                         visibleBattleText = "";
@@ -311,8 +314,10 @@ public class Main extends ApplicationAdapter {
             String moveName = moves[MathUtils.random(0, 3)];
             JsonValue moveData = movesRoot.get(moveName);
             Move move = new Move(moveName, moveData);
+            JsonValue typesData = typesRoot.get(move.getType());
+            TypeChart type = new TypeChart(move.getType(), typesData);
 
-            battle.applyMoveDamage(oppTeam.getCurrentPokemon(), playerTeam.getCurrentPokemon(), move);
+            battle.applyMoveDamage(oppTeam.getCurrentPokemon(), playerTeam.getCurrentPokemon(), move, type);
             battleText = oppTeam.getCurrentPokemon().getName() + " used " + move.getName() + "!       ";
             visibleBattleText = "";
             lettersShown = 0;
