@@ -64,6 +64,11 @@ public class PokemonRenderer {
         animation.setPlayMode(Animation.PlayMode.LOOP);
     }
 
+    public void renderIcon()
+    {
+
+    }
+
     public void update(double delta)
     {
         stateTime += delta;

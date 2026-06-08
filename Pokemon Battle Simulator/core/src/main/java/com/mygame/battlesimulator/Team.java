@@ -17,6 +17,11 @@ public class Team {
         return pokemon[currentIndex];
     }
 
+    public Pokemon setCurrentPokemon(Pokemon replacement)
+    {
+        return pokemon[currentIndex] = replacement;
+    }
+
     // Gets the pokemon at a specific index
     public Pokemon getPokemon(int index)
     {

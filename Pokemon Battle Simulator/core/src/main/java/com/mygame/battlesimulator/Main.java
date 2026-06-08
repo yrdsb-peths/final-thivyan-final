@@ -30,6 +30,7 @@ public class Main extends ApplicationAdapter {
     private ShapeRenderer shapeRenderer;
     private PokemonRenderer playerRenderer;
     private PokemonRenderer oppRenderer;
+    private PokemonRenderer iconRenderer;
 
     private Texture sheet;
     private Animation<TextureRegion> animation;
@@ -51,20 +52,6 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void create() {
-
-//
-//        // CREATE ANIMATION
-//        animation = new Animation<>(0.05f, frames);
-//
-//
-//        animation.setPlayMode(Animation.PlayMode.LOOP);
-//
-//
-//        stateTime = 0f;
-
-//        shapeRenderer = new ShapeRenderer();
-//        batch = new SpriteBatch();
-
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/pokemon-ds-font.ttf"));
@@ -160,12 +147,19 @@ public class Main extends ApplicationAdapter {
             font.draw(batch, "   Lv. 100", 180, 450);
             batch.end();
 
-            // health bar
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+            // Creates black bar
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            shapeRenderer.setColor(0f ,0f ,0f, 0.5f);
+            shapeRenderer.rect(0, 30, Gdx.graphics.getWidth(), 115);
+
+            // health bar
             drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 400, 200);
             drawHp(oppTeam.getCurrentPokemon(), displayedOppHp, 80, 400);
-            shapeRenderer.end();
 
+            shapeRenderer.end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
         }
 
         if (battleState.equals("PLAYER")) {
@@ -181,7 +175,6 @@ public class Main extends ApplicationAdapter {
 
             String[] moves = playerTeam.getCurrentPokemon().getMoves();
 
-            int screenWidth = Gdx.graphics.getWidth();
             int buttonWidth = 180;
             int buttonHeight = 45;
 
@@ -191,22 +184,10 @@ public class Main extends ApplicationAdapter {
             int gapX = 20;
             int gapY = 15;
 
-
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++)
+            {
                 int x = startX + (i % 2) * (buttonWidth + gapX);
                 int y = startY + (i / 2) * (buttonHeight + gapY);
-
-
-                //            if (i < 2)
-                //            {
-                //                 x = 50 + i * (270);
-                //                 y = 50;
-                //            }
-                //            else
-                //            {
-                //                x = 50 + ((i - 2) * 270);
-                //                y = 140;
-                //            }
 
                 String moveName = moves[i];
                 JsonValue movesData = movesRoot.get(moveName);
@@ -218,10 +199,24 @@ public class Main extends ApplicationAdapter {
                 shapeRenderer.rect(x, y, buttonWidth, buttonHeight);
             }
 
-
             shapeRenderer.end();
 
             batch.begin();
+
+            for (int i = 0; i < 6; i++)
+            {
+                Texture icon = new Texture(playerTeam.getPokemon(i).getIcon());
+                if (playerTeam.getPokemon(i).isFainted())
+                {
+                    batch.setColor(Color.BLACK);
+                }
+                batch.draw(icon, 0, 370 - 35*i, 40, 40);
+                //batch.draw(icon, 400 + 35*i, 150, 30, 30);
+                batch.setColor(Color.WHITE);
+            }
+
+
+            font.draw(batch, "Switch", 485, 100);
 
             for (int i = 0; i < 4; i++) {
 
@@ -246,8 +241,13 @@ public class Main extends ApplicationAdapter {
                 float mouseX = mousePosition.x;
                 float mouseY = mousePosition.y;
                 //startX = screenWidth/2 - 200;
-//                System.out.println("mouse x: " + mouseX);
-//                System.out.println("mouse y: " + mouseY);
+                System.out.println("mouse x: " + mouseX);
+                System.out.println("mouse y: " + mouseY);
+
+                if (mouseX >= 475 && mouseX <= 555 && mouseY >= 75 && mouseY <= 100)
+                {
+                    battleState = "SWITCHING";
+                }
 
                 for (int i = 0; i < 4; i++) {
                     int x = startX + (i % 2) * (buttonWidth + gapX);
@@ -260,7 +260,7 @@ public class Main extends ApplicationAdapter {
                         JsonValue typesData = typesRoot.get(move.getType());
                         TypeChart type = new TypeChart(move.getType(), typesData);
 
-                        battle.applyMoveDamage(playerTeam.getCurrentPokemon(), oppTeam.getCurrentPokemon(), move, type);
+                        String message = battle.applyMoveDamage(playerTeam.getCurrentPokemon(), oppTeam.getCurrentPokemon(), move, type);
 
                         battleText = playerTeam.getCurrentPokemon().getName() + " used " + move.getName() + "!       ";
                         visibleBattleText = "";
@@ -311,6 +311,28 @@ public class Main extends ApplicationAdapter {
             }
 
         }
+        else if (battleState.equals("SWITCHING"))
+        {
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            shapeRenderer.setAutoShapeType(true);
+            shapeRenderer.begin();
+            shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(0f, 0f, 0f, 0.5f);
+            shapeRenderer.rect(60, 10, 520, 450);
+            shapeRenderer.set(ShapeRenderer.ShapeType.Line);
+            shapeRenderer.setColor(Color.CLEAR_WHITE);
+            shapeRenderer.rect(60, 10, 520, 450);
+
+            batch.begin();
+            for (int i = 0; i < 6; i++)
+            {
+
+            }
+
+            shapeRenderer.end();
+
+            Gdx.gl.glDisable(GL20.GL_BLEND);
+        }
         else if (battleState.equals("OPPONENT"))
         {
             String[] moves = oppTeam.getCurrentPokemon().getMoves();
@@ -320,7 +342,7 @@ public class Main extends ApplicationAdapter {
             JsonValue typesData = typesRoot.get(move.getType());
             TypeChart type = new TypeChart(move.getType(), typesData);
 
-            battle.applyMoveDamage(oppTeam.getCurrentPokemon(), playerTeam.getCurrentPokemon(), move, type);
+            String message = battle.applyMoveDamage(oppTeam.getCurrentPokemon(), playerTeam.getCurrentPokemon(), move, type);
             battleText = oppTeam.getCurrentPokemon().getName() + " used " + move.getName() + "!       ";
             visibleBattleText = "";
             lettersShown = 0;
@@ -397,26 +419,6 @@ public class Main extends ApplicationAdapter {
                 battleState = "PLAYER";
             }
         }
-
-
-//        stateTime += Gdx.graphics.getDeltaTime();
-//
-//
-//        Gdx.gl.glClearColor(0.15f, 0.15f, 0.2f, 1f);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//
-//
-//        TextureRegion currentFrame = animation.getKeyFrame(stateTime);
-//
-//
-//        batch.begin();
-//
-//
-//        batch.draw(currentFrame, 140, 210);
-//
-//
-//        batch.end();
-
     }
 
     public void drawHp (Pokemon pokemon, float displayedHp, float x, float y)

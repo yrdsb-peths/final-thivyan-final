@@ -21,7 +21,7 @@
     "animation": {
       "userSprite": "pokemon/sprites/charizard/charizardBack.png",
       "oppSprite": "pokemon/sprites/charizard/charizardFront.png",
-      "icon": "pokemon/sprites/charizard.png",
+      "icon": "pokemon/sprites/charizard/charizard.png",
 
       "userWidth": 98,
       "userHeight": 83,
@@ -61,7 +61,7 @@
     "animation": {
       "userSprite": "pokemon/sprites/mewtwo/mewtwoBack.png",
       "oppSprite": "pokemon/sprites/mewtwo/mewtwoFront.png",
-      "icon": "pokemon/sprites/mewtwo.png",
+      "icon": "pokemon/sprites/mewtwo/mewtwo.png",
 
       "userWidth": 95,
       "userHeight": 70,
@@ -101,7 +101,7 @@
     "animation": {
       "userSprite": "pokemon/sprites/reshiram/reshiramBack.png",
       "oppSprite": "pokemon/sprites/reshiram/reshiramFront.png",
-      "icon": "pokemon/sprites/reshiram.png",
+      "icon": "pokemon/sprites/reshiram/reshiram.png",
 
       "userWidth": 100,
       "userHeight": 89,
@@ -140,7 +140,7 @@
     "animation": {
       "userSprite": "pokemon/sprites/zekrom/zekromBack.png",
       "oppSprite": "pokemon/sprites/zekrom/zekromFront.png",
-      "icon": "pokemon/sprites/zekrom.png",
+      "icon": "pokemon/sprites/zekrom/zekrom.png",
 
       "userWidth": 107,
       "userHeight": 91,
@@ -179,7 +179,7 @@
     "animation": {
       "userSprite": "pokemon/sprites/darkrai/darkraiBack.png",
       "oppSprite": "pokemon/sprites/darkrai/darkraiFront.png",
-      "icon": "pokemon/sprites/darkrai.png",
+      "icon": "pokemon/sprites/darkrai/darkrai.png",
 
       "userWidth": 91,
       "userHeight": 87,
