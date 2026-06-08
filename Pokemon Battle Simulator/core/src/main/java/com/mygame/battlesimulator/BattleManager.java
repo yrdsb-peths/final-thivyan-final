@@ -55,7 +55,12 @@ public class BattleManager {
         defender.takeDamage(damage);
 
         // Returns how effective the move was
-        if (effectiveness < 1)
+        if (effectiveness == 0)
+        {
+            System.out.println("It had no effect...");
+            return "It had no effect...";
+        }
+        else if (effectiveness < 1)
         {
             System.out.println("It's not very effective...");
             return "It's not very effective...";
@@ -65,16 +70,12 @@ public class BattleManager {
             System.out.println("It's super effective!");
             return "It's super effective!";
         }
-        else if (effectiveness == 0)
-        {
-            System.out.println("It had no effect...");
-            return "It had no effect...";
-        }
 
         // Neutral effectiveness
         return "";
     }
 
+    // Returns the effectiveness of a move's type against the defending type
     public float getEffectiveness(String type, TypeChart moveType)
     {
         if (type.equals("Normal"))

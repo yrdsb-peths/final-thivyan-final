@@ -23,6 +23,7 @@ public class Pokemon {
     private String type2;
     private String userSprite;
     private String oppSprite;
+    private String icon;
     private String[] moves;
     private int userWidth;
     private int userHeight;
@@ -58,6 +59,7 @@ public class Pokemon {
         //JsonValue animation = data.get("animation");
         this.userSprite = data.get("animation").getString("userSprite");
         this.oppSprite = data.get("animation").getString("oppSprite");
+        this.icon = data.get("animation").getString("icon");
         this.userWidth = data.get("animation").getInt("userWidth");
         this.userHeight = data.get("animation").getInt("userHeight");
         this.oppWidth = data.get("animation").getInt("oppWidth");
@@ -80,9 +82,9 @@ public class Pokemon {
         this.status = "";
         this.attackStage = 0;
         this.defenseStage = 0;
-        this.specialAttack = 0;
-        this.specialDefense = 0;
-        this.speed = 0;
+        this.specialAttackStage = 0;
+        this.specialDefenseStage = 0;
+        this.speedStage = 0;
     }
 
     public void takeDamage(int damage)
@@ -153,6 +155,10 @@ public class Pokemon {
         return oppSprite;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
     public int getUserWidth() {
         return userWidth;
     }
@@ -194,4 +200,5 @@ public class Pokemon {
     public float getScale() {
         return scale;
     }
+
 }
