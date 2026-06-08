@@ -34,34 +34,12 @@ public class Pokemon {
     private boolean legendary;
     private boolean canMegaEvolve;
 
-    private SpriteBatch batch;
-
-
-    private Texture sheet;
-    private Animation<TextureRegion> animation;
-
-
-    private float stateTime;
-
-//    public Pokemon(String name, int health, int attack, int defense, int specialAttack, int specialDefense, int speed, String type1, String type2, String userSprite, String oppSprite, String[] moves, int width, int height, int userFrames, int oppFrames)
-//    {
-//        this.name = name;
-//        this.health = health;
-//        this.attack = attack;
-//        this.defense = defense;
-//        this.specialAttack = specialAttack;
-//        this.specialDefense = specialDefense;
-//        this.speed = speed;
-//        this.type1 = type1;
-//        this.type2 = type2;
-//        this.userSprite = userSprite;
-//        this.oppSprite = oppSprite;
-//        this.moves = moves;
-//        this.width = width;
-//        this.height = height;
-//        this.userFrames = userFrames;
-//        this.oppFrames = oppFrames;
-//    }
+    private String status;
+    private int attackStage;
+    private int defenseStage;
+    private int specialAttackStage;
+    private int specialDefenseStage;
+    private int speedStage;
 
     public Pokemon(JsonValue data)
     {
@@ -98,6 +76,13 @@ public class Pokemon {
 
         this.legendary = data.getBoolean("legendary");
         this.canMegaEvolve = data.getBoolean("canMegaEvolve");
+
+        this.status = "";
+        this.attackStage = 0;
+        this.defenseStage = 0;
+        this.specialAttack = 0;
+        this.specialDefense = 0;
+        this.speed = 0;
     }
 
     public void takeDamage(int damage)

@@ -153,8 +153,11 @@ public class Main extends ApplicationAdapter {
             batch.begin();
 
             playerRenderer.draw(batch, 110, 80, true);
+            font.draw(batch, playerTeam.getCurrentPokemon().getName(), 400, 250);
+            font.draw(batch,  "   Lv. 100", 500, 250);
             oppRenderer.draw(batch, 370, 250, false);
-
+            font.draw(batch, oppTeam.getCurrentPokemon().getName(), 80, 450);
+            font.draw(batch, "   Lv. 100", 180, 450);
             batch.end();
 
             // health bar
