@@ -317,20 +317,67 @@ public class Main extends ApplicationAdapter {
             shapeRenderer.setAutoShapeType(true);
             shapeRenderer.begin();
             shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-            shapeRenderer.setColor(0f, 0f, 0f, 0.5f);
+            shapeRenderer.setColor(0f, 0f, 0f, 0.9f);
             shapeRenderer.rect(60, 10, 520, 450);
             shapeRenderer.set(ShapeRenderer.ShapeType.Line);
             shapeRenderer.setColor(Color.CLEAR_WHITE);
             shapeRenderer.rect(60, 10, 520, 450);
+            shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
 
             batch.begin();
             for (int i = 0; i < 6; i++)
             {
+                Texture icon = new Texture(playerTeam.getPokemon(i).getIcon());
+                if (playerTeam.getPokemon(i).isFainted())
+                {
+                    batch.setColor(Color.BLACK);
+                }
+                batch.draw(icon, 90, 400 - 70*i, 40, 40);
+                batch.setColor(Color.WHITE);
+                font.draw(batch, playerTeam.getPokemon(i).getName(), 140, 420 - 70*i);
+                drawHp(playerTeam.getPokemon(i), displayedPlayerHp, 350, 400 - 70*i);
+//                shapeRenderer.set(ShapeRenderer.ShapeType.Line);
+//                shapeRenderer.rect(85, 397 - 70*i, 470, 45);
 
             }
 
-            shapeRenderer.end();
+            font.draw(batch, "Back", 485, 450);
 
+            //startX = screenWidth/2 - 200;
+            if (Gdx.input.justTouched())
+            {
+                mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+
+                camera.unproject(mousePosition);
+                float mouseX = mousePosition.x;
+                float mouseY = mousePosition.y;
+
+                System.out.println("mouse x: " + mouseX);
+                System.out.println("mouse y: " + mouseY);
+
+                if (mouseX >= 475 && mouseX <= 555 && mouseY >= 420 && mouseY <= 460)
+                {
+                    battleState = "PLAYER";
+                }
+
+                for (int i = 0; i < 6; i++)
+                {
+                    if (mouseX >= 85 && mouseX <= 555 && mouseY >= 397 - 70*i && mouseY <= 420 - 70*i)
+                    {
+                        // Switches to first pokemon
+                        if (!playerTeam.getPokemon(i).isFainted())
+                        {
+                            playerTeam.switchPokemon(i);
+                            playerRenderer.dispose();
+                            playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
+                            battleState = "PLAYER";
+                        }
+                    }
+                }
+            }
+
+            batch.end();
+            shapeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
         }
         else if (battleState.equals("OPPONENT"))
@@ -421,18 +468,23 @@ public class Main extends ApplicationAdapter {
         }
     }
 
-    public void drawHp (Pokemon pokemon, float displayedHp, float x, float y)
-    {
+    public void drawHp (Pokemon pokemon, float displayedHp, float x, float y) {
         float maxWidth = 200;
         float height = 18;
 
-        float hpPercent = displayedHp/pokemon.getHealth();
+        float hpPercent = displayedHp / pokemon.getHealth();
+        float hpWidth = maxWidth * hpPercent;
+
+        if (hpWidth > maxWidth)
+        {
+            hpWidth = maxWidth;
+        }
 
         shapeRenderer.setColor(Color.DARK_GRAY);
         shapeRenderer.rect(x, y, maxWidth, height);
 
         shapeRenderer.setColor(Color.GREEN);
-        shapeRenderer.rect(x, y, maxWidth*hpPercent, height);
+        shapeRenderer.rect(x, y, hpWidth, height);
     }
 
     @Override
