@@ -36,38 +36,47 @@ public class PokemonDatabase {
             boolean legendary = pokemonData.getBoolean("legendary", false);
             boolean canMegaEvolve = pokemonData.getBoolean("canMegaEvolve", false);
 
-            if (legendary) {
+            if (legendary)
+            {
                 legendaryPokemon.add(id);
-            } else {
+            }
+            else
+            {
                 normalPokemon.add(id);
             }
 
-            if (canMegaEvolve) {
+            if (canMegaEvolve)
+            {
                 megaPokemon.add(id);
             }
         }
     }
 
-    public Pokemon getPokemon(String id) {
+    public Pokemon getPokemon(String id)
+    {
         return new Pokemon(root.get(id));
     }
 
-    public Pokemon getRandomPokemon() {
+    public Pokemon getRandomPokemon()
+    {
         String id = allPokemon.get(MathUtils.random(allPokemon.size - 1));
         return getPokemon(id);
     }
 
-    public Pokemon getRandomLegendary() {
+    public Pokemon getRandomLegendary()
+    {
         String id = legendaryPokemon.get(MathUtils.random(legendaryPokemon.size - 1));
         return getPokemon(id);
     }
 
-    public Pokemon getRandomMega() {
+    public Pokemon getRandomMega()
+    {
         String id = megaPokemon.get(MathUtils.random(megaPokemon.size - 1));
         return getPokemon(id);
     }
 
-    public Pokemon getRandomNormal() {
+    public Pokemon getRandomNormal()
+    {
         String id = normalPokemon.get(MathUtils.random(normalPokemon.size - 1));
         return getPokemon(id);
     }
