@@ -28,6 +28,7 @@ public class Main extends ApplicationAdapter {
     private OrthographicCamera camera;
     private Vector3 mousePosition = new Vector3();
     private SpriteBatch batch;
+    private Texture background;
     private ShapeRenderer shapeRenderer;
     private PokemonDatabase database;
     private PokemonRenderer playerRenderer;
@@ -65,6 +66,7 @@ public class Main extends ApplicationAdapter {
     private float typingTimer;
     private int lettersShown;
 
+    private boolean backgroundPresent;
     private boolean animationReset;
     private boolean playerMoveDone;
     private boolean oppMoveDone;
@@ -111,6 +113,14 @@ public class Main extends ApplicationAdapter {
         battleMusic.setLooping(true);
         battleMusic.setVolume(0.4f);
         battleMusic.play();
+
+//        background = new Texture ("ui/backgrounds.png");
+//        TextureRegion[][] backgrounds = TextureRegion.split(background, 126, 99);
+//
+//        batch.begin();
+//        batch.draw(background, 100, 100, 400, 400);
+//        batch.end();
+        backgroundPresent = false;
     }
 
 
@@ -122,6 +132,12 @@ public class Main extends ApplicationAdapter {
 
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
         if (!battleState.equals("GAME OVER")) {
+            if (!backgroundPresent)
+            {
+                drawBackground();
+                backgroundPresent = true;
+            }
+
             displayBattleBar();
         }
 
@@ -349,14 +365,14 @@ public class Main extends ApplicationAdapter {
     private void drawBackground()
     {
         batch.begin();
-        //batch.draw(texutre, 0, 0, 1280, 720);
+        background = new Texture ("ui/backgrounds.jpg");
+        background.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        TextureRegion[][] backgrounds = TextureRegion.split(background, 504, 393);
+
+        batch.draw(backgrounds[MathUtils.random(0,2)][MathUtils.random(0,2)], 0, 0, 650, 500);
         batch.end();
     }
 
-    private void getUserMove()
-    {
-
-    }
 
     // Displays health bars, names, levels, and types
     private void displayBattleBar()
@@ -681,6 +697,8 @@ public class Main extends ApplicationAdapter {
         displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
         displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
         //System.out.println("awrnoawt");
+
+        backgroundPresent = false;
         battleState = "PLAYER";
     }
 
