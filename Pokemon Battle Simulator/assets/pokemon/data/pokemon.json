@@ -439,8 +439,7 @@
     },
 
 
-    "canMegaEvolve": true,
-    "megaId": "mega_metagross"
+    "canMegaEvolve": false
   },
 
 

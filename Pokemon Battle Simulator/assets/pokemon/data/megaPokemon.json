@@ -1,0 +1,188 @@
+{
+  "mega_charizard_x": {
+    "name": "Mega Charizard X",
+
+
+    "type1": "Fire",
+    "type2": "Dragon",
+
+
+    "legendary": false,
+
+
+    "stats": {
+      "hp": 360,
+      "attack": 394,
+      "defense": 348,
+      "specialAttack": 394,
+      "specialDefense": 295,
+      "speed": 328
+    },
+
+
+    "moves": ["Flamethrower", "Dragon Claw", "Earthquake", "Air Slash"],
+
+
+    "animation": {
+      "userSprite": "pokemon/sprites/mega_charizard_x/megaCharizardXBack.png",
+      "oppSprite": "pokemon/sprites/mega_charizard_x/megaCharizardXFront.png",
+      "icon": "pokemon/sprites/mega_charizard_x/megaCharizardX.png",
+
+
+      "userWidth": 96,
+      "userHeight": 96,
+
+
+      "oppWidth": 96,
+      "oppHeight": 96,
+
+
+      "userFrames": 12,
+      "oppFrames": 45,
+
+
+      "scale": 2.5
+    }
+  },
+
+
+  "mega_mewtwo_x": {
+    "name": "Mega Mewtwo X",
+
+
+    "type1": "Psychic",
+    "type2": "Fighting",
+
+
+    "legendary": true,
+
+
+    "stats": {
+      "hp": 416,
+      "attack": 526,
+      "defense": 394,
+      "specialAttack": 350,
+      "specialDefense": 328,
+      "speed": 394
+    },
+
+
+    "moves": ["Psychic", "Aura Sphere", "Ice Beam", "Shadow Ball"],
+
+
+    "animation": {
+      "userSprite": "pokemon/sprites/mega_mewtwo_x/megaMewtwoXBack.png",
+      "oppSprite": "pokemon/sprites/mega_mewtwo_x/megaMewtwoXFront.png",
+      "icon": "pokemon/sprites/mega_mewtwo_x/megaMewtwoX.png",
+
+
+      "userWidth": 96,
+      "userHeight": 96,
+
+
+      "oppWidth": 96,
+      "oppHeight": 96,
+
+
+      "userFrames": 45,
+      "oppFrames": 45,
+
+
+      "scale": 2.5
+    }
+  },
+
+
+  "mega_lucario": {
+    "name": "Mega Lucario",
+
+
+    "type1": "Fighting",
+    "type2": "Steel",
+
+
+    "legendary": false,
+
+
+    "stats": {
+      "hp": 344,
+      "attack": 427,
+      "defense": 306,
+      "specialAttack": 427,
+      "specialDefense": 306,
+      "speed": 355
+    },
+
+
+    "moves": ["Aura Sphere", "Close Combat", "Flash Cannon", "Dark Pulse"],
+
+
+    "animation": {
+      "userSprite": "pokemon/sprites/mega_lucario/megaLucarioBack.png",
+      "oppSprite": "pokemon/sprites/mega_lucario/megaLucarioFront.png",
+      "icon": "pokemon/sprites/mega_lucario/megaLucario.png",
+
+
+      "userWidth": 96,
+      "userHeight": 96,
+
+
+      "oppWidth": 96,
+      "oppHeight": 96,
+
+
+      "userFrames": 45,
+      "oppFrames": 45,
+
+
+      "scale": 2.2
+    }
+  },
+
+
+  "mega_scizor": {
+    "name": "Mega Scizor",
+
+
+    "type1": "Bug",
+    "type2": "Steel",
+
+
+    "legendary": false,
+
+
+    "stats": {
+      "hp": 344,
+      "attack": 438,
+      "defense": 438,
+      "specialAttack": 251,
+      "specialDefense": 328,
+      "speed": 229
+    },
+
+
+    "moves": ["Bullet Punch", "X-Scissor", "Iron Head", "Brick Break"],
+
+
+    "animation": {
+      "userSprite": "pokemon/sprites/mega_scizor/megaScizorBack.png",
+      "oppSprite": "pokemon/sprites/mega_scizor/megaScizorFront.png",
+      "icon": "pokemon/sprites/mega_scizor/megaScizor.png",
+
+
+      "userWidth": 96,
+      "userHeight": 96,
+
+
+      "oppWidth": 96,
+      "oppHeight": 96,
+
+
+      "userFrames": 45,
+      "oppFrames": 45,
+
+
+      "scale": 2.3
+    }
+  }
+}
