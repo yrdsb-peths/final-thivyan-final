@@ -55,6 +55,8 @@ public class Main extends ApplicationAdapter {
 
     private float displayedPlayerHp;
     private float displayedOppHp;
+    private int backgroundX;
+    private int backgroundY;
 
     private String battleState;
     private String battleText;
@@ -65,8 +67,7 @@ public class Main extends ApplicationAdapter {
     private String visibleEffectiveText;
     private float typingTimer;
     private int lettersShown;
-
-    private boolean backgroundPresent;
+    
     private boolean animationReset;
     private boolean playerMoveDone;
     private boolean oppMoveDone;
@@ -120,7 +121,8 @@ public class Main extends ApplicationAdapter {
 //        batch.begin();
 //        batch.draw(background, 100, 100, 400, 400);
 //        batch.end();
-        backgroundPresent = false;
+        backgroundX = MathUtils.random(0,2);
+        backgroundY = MathUtils.random(0,2);
     }
 
 
@@ -131,13 +133,9 @@ public class Main extends ApplicationAdapter {
         shapeRenderer.setProjectionMatrix(camera.combined);
 
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        if (!battleState.equals("GAME OVER")) {
-            if (!backgroundPresent)
-            {
-                drawBackground();
-                backgroundPresent = true;
-            }
 
+        if (!battleState.equals("GAME OVER")) {
+            drawBackground();
             displayBattleBar();
         }
 
@@ -698,7 +696,8 @@ public class Main extends ApplicationAdapter {
         displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
         //System.out.println("awrnoawt");
 
-        backgroundPresent = false;
+        backgroundX = MathUtils.random(0,2);
+        backgroundY = MathUtils.random(0,2);
         battleState = "PLAYER";
     }
 
