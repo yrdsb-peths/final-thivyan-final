@@ -25,26 +25,30 @@ import com.badlogic.gdx.utils.*;
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
 
+    // Set up battle space and input
     private OrthographicCamera camera;
     private Vector3 mousePosition = new Vector3();
     private SpriteBatch batch;
     private Texture background;
+    private TextureRegion[][] backgrounds;
     private ShapeRenderer shapeRenderer;
     private PokemonDatabase database;
     private PokemonRenderer playerRenderer;
     private PokemonRenderer oppRenderer;
     private PokemonRenderer iconRenderer;
 
+    // Load the textures and fonts
     private Texture sheet;
     private Animation<TextureRegion> animation;
     private float stateTime;
     private BitmapFont font;
-    private BitmapFont smallFont;
 
+    // Create the teams and battle
     private BattleManager battle;
     private Team playerTeam;
     private Team oppTeam;
 
+    // Load pokemon/move/type details
     private JsonValue root;
     private JsonValue movesRoot;
     private JsonValue typesRoot;
@@ -53,11 +57,15 @@ public class Main extends ApplicationAdapter {
     private String oppMoveName;
     private TypeChart userType;
 
+    // Display health bar
     private float displayedPlayerHp;
     private float displayedOppHp;
+
+    // Choose background
     private int backgroundX;
     private int backgroundY;
 
+    // Display text after a move is used
     private String battleState;
     private String battleText;
     private String effectiveText;
@@ -67,12 +75,15 @@ public class Main extends ApplicationAdapter {
     private String visibleEffectiveText;
     private float typingTimer;
     private int lettersShown;
-    
     private boolean animationReset;
+
+    // Keep track of turns
     private boolean playerMoveDone;
     private boolean oppMoveDone;
     private boolean firstTurn;
+    private boolean megaUsed;
 
+    // Music
     private Music battleMusic;
     private Music hitEffect;
 
@@ -80,32 +91,38 @@ public class Main extends ApplicationAdapter {
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        // Sets the custom font
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/pokemon-ds-font.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 32;
+        parameter.borderWidth = 1;
+        parameter.borderColor = Color.BLACK;
         font = generator.generateFont(parameter);
-
         generator.dispose();
 
+        // Creates the player and opponent teams
         database = new PokemonDatabase();
         createPlayerTeam();
         createOppTeam();
 
-            //System.out.println()
+        // Sets up the battle sprites
         battle = new BattleManager();
         batch = new SpriteBatch();
         playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
         oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), false);
         shapeRenderer = new ShapeRenderer();
 
+        // Gets the Pokemon/moves/types information from the respective JSON files
         JsonReader reader = new JsonReader();
         root = reader.parse(Gdx.files.internal("pokemon/data/pokemon.json"));
         movesRoot = reader.parse(Gdx.files.internal("pokemon/data/moves.Json"));
         typesRoot = reader.parse(Gdx.files.internal("pokemon/data/types.Json"));
 
+        //
         displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
         displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
-        battleState = "PLAYER";
+        battleState = "TITLE";
 
         hitEffect = Gdx.audio.newMusic(Gdx.files.internal("sounds/hit.mp3"));
         hitEffect.setVolume(0.8f);
@@ -123,6 +140,9 @@ public class Main extends ApplicationAdapter {
 //        batch.end();
         backgroundX = MathUtils.random(0,2);
         backgroundY = MathUtils.random(0,2);
+        background = new Texture ("ui/backgrounds.jpg");
+        background.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        backgrounds = TextureRegion.split(background, 504, 393);
     }
 
 
@@ -134,12 +154,16 @@ public class Main extends ApplicationAdapter {
 
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
 
-        if (!battleState.equals("GAME OVER")) {
+        if (!battleState.equals("GAME OVER") && !battleState.equals("TITLE")) {
             drawBackground();
             displayBattleBar();
         }
 
-        if (battleState.equals("PLAYER")) {
+        if (battleState.equals("TITLE"))
+        {
+            drawTitleScreen();
+        }
+        else if (battleState.equals("PLAYER")) {
             playerMoveDone = true;
             oppMoveDone = true;
             getInput();
@@ -183,8 +207,22 @@ public class Main extends ApplicationAdapter {
             if (Gdx.input.justTouched())
             {
                 battleMusic.play();
-                startNewBattle();
+                restartBattle();
             }
+        }
+    }
+
+    private void drawTitleScreen()
+    {
+        batch.begin();
+        font.draw(batch, "Pokemon Battle", 240, 280);
+        font.draw(batch, "Simulator", 277, 250);
+        font.draw(batch, "Click anywhere to start", 197, 100);
+        batch.end();
+
+        if (Gdx.input.justTouched())
+        {
+            battleState = "PLAYER";
         }
     }
 
@@ -287,11 +325,24 @@ public class Main extends ApplicationAdapter {
         visibleEffectiveText = "";
         lettersShown = 0;
         typingTimer = 0f;
-        //firstTurn = true;
         animationReset = true;
-        //checkOppFainted();
+    }
 
-        //battleState = "SPEED";
+    private void megaEvolve()
+    {
+        Pokemon current = playerTeam.getCurrentPokemon();
+
+        if (megaUsed)
+        {
+            return;
+        }
+
+        if (!current.canMega())
+        {
+            return;
+        }
+
+        Pokemon mega = database.get
     }
 
     private void drawTeamIcons()
@@ -363,11 +414,7 @@ public class Main extends ApplicationAdapter {
     private void drawBackground()
     {
         batch.begin();
-        background = new Texture ("ui/backgrounds.jpg");
-        background.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-        TextureRegion[][] backgrounds = TextureRegion.split(background, 504, 393);
-
-        batch.draw(backgrounds[MathUtils.random(0,2)][MathUtils.random(0,2)], 0, 0, 650, 500);
+        batch.draw(backgrounds[backgroundX][backgroundY], 0, 0, 650, 500);
         batch.end();
     }
 
@@ -648,41 +695,11 @@ public class Main extends ApplicationAdapter {
         }
     }
 
-    private void startNewBattle()
+    private void restartBattle()
     {
         dispose();
-        PokemonDatabase database = new PokemonDatabase();
-        Pokemon[] team = new Pokemon[6];
-        //team[0] = database.getRandomMega();
-        team[0] = database.getPokemon("reshiram");
-        team[1] = database.getRandomLegendary();
-        for (int i = 2; i < 6; i++) {
-            team[i] = database.getRandomPokemon();
-            if (team[i] == team[0] || team[i] == team[1] || team[i] == team[2] || team[i] == team[3] || team[i] == team[4] || team[i] == team[5]) {
-                team[i] = database.getRandomPokemon();
-            }
-        }
-
-        playerTeam = new Team(team);
-        for (int i = 0; i < 6; i++) {
-            System.out.println(playerTeam.getPokemon(i).getName());
-        }
-
-        Pokemon[] team2 = new Pokemon[6];
-        team2[0] = database.getRandomMega();
-        team2[1] = database.getRandomLegendary();
-        for (int i = 2; i < 6; i++) {
-            team2[i] = database.getRandomPokemon();
-            if (team2[i] == team2[0] || team2[i] == team2[1] || team2[i] == team2[2] || team2[i] == team2[3] || team2[i] == team2[4] || team2[i] == team2[5]) {
-                team2[i] = database.getRandomPokemon();
-            }
-        }
-
-        oppTeam = new Team(team2);
-        for (int i = 0; i < 6; i++) {
-            System.out.println(oppTeam.getPokemon(i).getName());
-        }
-
+        createPlayerTeam();
+        createOppTeam();
 
         //System.out.println()
         battle = new BattleManager();
@@ -694,8 +711,8 @@ public class Main extends ApplicationAdapter {
 
         displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
         displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
-        //System.out.println("awrnoawt");
 
+        // Creates new background
         backgroundX = MathUtils.random(0,2);
         backgroundY = MathUtils.random(0,2);
         battleState = "PLAYER";
@@ -815,6 +832,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void dispose() {
+        background.dispose();
         hitEffect.dispose();
         battleMusic.dispose();
         playerRenderer.dispose();
