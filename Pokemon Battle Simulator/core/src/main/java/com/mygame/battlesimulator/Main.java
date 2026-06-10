@@ -6,6 +6,7 @@ package com.mygame.battlesimulator;
 //import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,6 +38,7 @@ public class Main extends ApplicationAdapter {
     private Animation<TextureRegion> animation;
     private float stateTime;
     private BitmapFont font;
+    private BitmapFont smallFont;
 
     private BattleManager battle;
     private Team playerTeam;
@@ -68,6 +70,9 @@ public class Main extends ApplicationAdapter {
     private boolean oppMoveDone;
     private boolean firstTurn;
 
+    private Music battleMusic;
+    private Music hitEffect;
+
     @Override
     public void create() {
         camera = new OrthographicCamera();
@@ -98,6 +103,14 @@ public class Main extends ApplicationAdapter {
         displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
         displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
         battleState = "PLAYER";
+
+        hitEffect = Gdx.audio.newMusic(Gdx.files.internal("sounds/hit.mp3"));
+        hitEffect.setVolume(0.8f);
+
+        battleMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/champion.mp3"));
+        battleMusic.setLooping(true);
+        battleMusic.setVolume(0.4f);
+        battleMusic.play();
     }
 
 
@@ -151,9 +164,11 @@ public class Main extends ApplicationAdapter {
             batch.begin();
             font.draw(batch, "Click to play again", 240, 250);
             batch.end();
+            battleMusic.pause();
 
             if (Gdx.input.justTouched())
             {
+                battleMusic.play();
                 startNewBattle();
             }
         }
@@ -252,6 +267,7 @@ public class Main extends ApplicationAdapter {
         TypeChart type = new TypeChart(userMove.getType(), typesData);
 
         effectiveText = battle.applyMoveDamage(playerTeam.getCurrentPokemon(), oppTeam.getCurrentPokemon(), userMove, type);
+        hitEffect.play();
         battleText = playerTeam.getCurrentPokemon().getName() + " used " + userMove.getName() + "!       ";
         visibleBattleText = "";
         visibleEffectiveText = "";
@@ -342,6 +358,7 @@ public class Main extends ApplicationAdapter {
 
     }
 
+    // Displays health bars, names, levels, and types
     private void displayBattleBar()
     {
         displayedPlayerHp += (playerTeam.getCurrentPokemon().getCurrentHealth() - displayedPlayerHp) * 0.08f;
@@ -353,9 +370,25 @@ public class Main extends ApplicationAdapter {
 
         batch.begin();
 
+        Texture playerType1 = new Texture("ui/" + playerTeam.getCurrentPokemon().getType1() + ".png");
+        Texture playerType2 = new Texture("ui/" + playerTeam.getCurrentPokemon().getType2() + ".png");
+
+        Texture oppType1 = new Texture("ui/" + oppTeam.getCurrentPokemon().getType1() + ".png");
+        Texture oppType2 = new Texture("ui/" + oppTeam.getCurrentPokemon().getType2() + ".png");
+
+        // Draws player Pokemon's types
+        batch.draw(playerType1, 395, 175, 59, 20);
+        batch.draw(playerType2, 455, 175, 59, 20);
+
+        // Draws opponent Pomemon's types
+        batch.draw(oppType1, 80, 374, 59, 20);
+        batch.draw(oppType2, 140, 374, 59, 20);
+
         playerRenderer.draw(batch, 110, 80, true);
         font.draw(batch, playerTeam.getCurrentPokemon().getName(), 400, 250);
         font.draw(batch,  "   Lv. 100", 500, 250);
+        font.draw(batch, playerTeam.getCurrentPokemon().getCurrentHealth() + "/" + playerTeam.getCurrentPokemon().getHealth(), 520, 195);
+
         oppRenderer.draw(batch, 370, 250, false);
         font.draw(batch, oppTeam.getCurrentPokemon().getName(), 80, 450);
         font.draw(batch, "   Lv. 100", 180, 450);
@@ -444,7 +477,7 @@ public class Main extends ApplicationAdapter {
             batch.draw(icon, 90, 400 - 70*i, 40, 40);
             batch.setColor(Color.WHITE);
             font.draw(batch, playerTeam.getPokemon(i).getName(), 140, 420 - 70*i);
-            drawHp(playerTeam.getPokemon(i), displayedPlayerHp, 350, 400 - 70*i);
+            drawHp(playerTeam.getPokemon(i), playerTeam.getPokemon(i).getCurrentHealth(), 350, 400 - 70*i);
 //                shapeRenderer.set(ShapeRenderer.ShapeType.Line);
 //                shapeRenderer.rect(85, 397 - 70*i, 470, 45);
 
@@ -556,6 +589,7 @@ public class Main extends ApplicationAdapter {
 
         //oppEffectiveness =
         effectiveText = battle.applyMoveDamage(oppTeam.getCurrentPokemon(), playerTeam.getCurrentPokemon(), move, type);
+        hitEffect.play();
         battleText = oppTeam.getCurrentPokemon().getName() + " used " + move.getName() + "!       ";
         visibleBattleText = "";
         visibleEffectiveText = "";
@@ -673,9 +707,16 @@ public class Main extends ApplicationAdapter {
     {
         if (hpPercent > 0.5)
         {
-            return Color.GREEN;
+            return Color.valueOf("69DC12");
         }
-        else if (hpPercent)
+        else if (hpPercent >= 0.2)
+        {
+            return Color.valueOf("FFDE00");
+        }
+        else
+        {
+            return Color.valueOf("FF0000");
+        }
 
     }
 
@@ -757,6 +798,8 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void dispose() {
+        hitEffect.dispose();
+        battleMusic.dispose();
         playerRenderer.dispose();
         oppRenderer.dispose();
         shapeRenderer.dispose();
