@@ -34,6 +34,7 @@ public class Pokemon {
     private float scale;
     private boolean legendary;
     private boolean canMegaEvolve;
+    private String megaId;
 
     private String status;
     private int attackStage;
@@ -78,6 +79,7 @@ public class Pokemon {
 
         this.legendary = data.getBoolean("legendary");
         this.canMegaEvolve = data.getBoolean("canMegaEvolve");
+        this.megaId = data.getString("megaId", "");
 
         this.status = "";
         this.attackStage = 0;
@@ -201,4 +203,7 @@ public class Pokemon {
         return scale;
     }
 
+    public String getMegaId() {
+        return megaId;
+    }
 }

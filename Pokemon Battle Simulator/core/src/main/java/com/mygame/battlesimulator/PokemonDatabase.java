@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.JsonValue;
 
 public class PokemonDatabase {
     private JsonValue root;
+    private JsonValue megaRoot;
 
     private Array<String> allPokemon;
     private Array<String> legendaryPokemon;
@@ -27,6 +28,7 @@ public class PokemonDatabase {
     private void loadPokemon() {
         JsonReader reader = new JsonReader();
         root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
+        megaRoot = reader.parse(Gdx.files.internal("Pokemon/data/megaPokemon.json"));
 
         for (JsonValue pokemonData = root.child; pokemonData != null; pokemonData = pokemonData.next) {
             String id = pokemonData.name;
@@ -55,6 +57,11 @@ public class PokemonDatabase {
     public Pokemon getPokemon(String id)
     {
         return new Pokemon(root.get(id));
+    }
+
+    public Pokemon getMegaPokemon(String id)
+    {
+        return new Pokemon(megaRoot.get(id))
     }
 
     public Pokemon getRandomPokemon()
