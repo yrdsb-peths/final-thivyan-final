@@ -2,6 +2,7 @@ package com.mygame.battlesimulator;
 
 import com.badlogic.gdx.utils.JsonValue;
 
+// Handles the effectiveness of a move's type against a Pokemon's type
 public class TypeChart {
     private String name;
     private float normal;

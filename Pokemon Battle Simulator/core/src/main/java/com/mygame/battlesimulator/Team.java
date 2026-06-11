@@ -1,5 +1,6 @@
 package com.mygame.battlesimulator;
 
+// Handles the Pokemon teams
 public class Team {
     private Pokemon[] pokemon;
     private int currentIndex;
@@ -15,11 +16,6 @@ public class Team {
     public Pokemon getCurrentPokemon()
     {
         return pokemon[currentIndex];
-    }
-
-    public int getCurrentIndex()
-    {
-        return currentIndex;
     }
 
     public Pokemon setCurrentPokemon(Pokemon replacement)
@@ -39,6 +35,7 @@ public class Team {
         currentIndex = newIndex;
     }
 
+    // if a Pokemon is knocked out, get next alive Pokemon
     public boolean findAvailablePokemon()
     {
         for (int i = 0; i < pokemon.length; i++)
@@ -52,9 +49,4 @@ public class Team {
 
         return false;
     }
-
-//    public boolean allFainted()
-//    {
-//        //
-//    }
 }

@@ -6,12 +6,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
+// Handles the animation of the Pokemon
 public class PokemonRenderer {
     private Pokemon pokemon;
     private Texture sheet;
     private Animation<TextureRegion> animation;
     private double stateTime;
 
+    // Constructs the sprite animation
     public PokemonRenderer(Pokemon pokemon, boolean playerSide)
     {
         this.pokemon = pokemon;
@@ -64,16 +66,13 @@ public class PokemonRenderer {
         animation.setPlayMode(Animation.PlayMode.LOOP);
     }
 
-    public void renderIcon()
-    {
-
-    }
-
+    // Updates animation time
     public void update(double delta)
     {
         stateTime += delta;
     }
 
+    // draws the Pokemon sprite frames
     public void draw(SpriteBatch batch, double x, double y, boolean playerSide)
     {
         TextureRegion currentFrame = animation.getKeyFrame((float) stateTime);
@@ -88,6 +87,7 @@ public class PokemonRenderer {
 
     }
 
+    // Disposes the sprite sheet
     public void dispose()
     {
         sheet.dispose();

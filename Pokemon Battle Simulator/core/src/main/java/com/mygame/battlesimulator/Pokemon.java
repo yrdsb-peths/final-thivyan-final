@@ -1,15 +1,11 @@
 package com.mygame.battlesimulator;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.Gdx;
 
+// Handles the details of each Pokemon
 public class Pokemon {
     private String name;
     private int health;
@@ -36,13 +32,7 @@ public class Pokemon {
     private boolean canMegaEvolve;
     private String megaId;
 
-    private String status;
-    private int attackStage;
-    private int defenseStage;
-    private int specialAttackStage;
-    private int specialDefenseStage;
-    private int speedStage;
-
+    // Constructs a Pokemon with stats, moves, types, animation details, and general descriptions
     public Pokemon(JsonValue data)
     {
         this.name = data.getString("name");
@@ -80,13 +70,6 @@ public class Pokemon {
         this.legendary = data.getBoolean("legendary");
         this.canMegaEvolve = data.getBoolean("canMegaEvolve");
         this.megaId = data.getString("megaId", "");
-
-        this.status = "";
-        this.attackStage = 0;
-        this.defenseStage = 0;
-        this.specialAttackStage = 0;
-        this.specialDefenseStage = 0;
-        this.speedStage = 0;
     }
 
     public void takeDamage(int damage)
@@ -114,11 +97,6 @@ public class Pokemon {
 
     public int getCurrentHealth() {
         return currentHealth;
-    }
-
-
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     public int getAttack() {

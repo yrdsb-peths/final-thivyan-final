@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
-
+// Sorts Pokemon into different categories and gets them for a team
 public class PokemonDatabase {
     private JsonValue root;
     private JsonValue megaRoot;
@@ -16,7 +16,7 @@ public class PokemonDatabase {
     private Array<String> megaPokemon;
     private Array<String> normalPokemon;
 
-    // Constructs arrays for the pokemon to be sorted in
+    // Constructs lists for the pokemon to be sorted in
     public PokemonDatabase() {
         allPokemon = new Array<>();
         legendaryPokemon = new Array<>();
@@ -26,7 +26,7 @@ public class PokemonDatabase {
         loadPokemon();
     }
 
-
+    // Sorts the pokemon into lists
     private void loadPokemon() {
         JsonReader reader = new JsonReader();
         root = reader.parse(Gdx.files.internal("Pokemon/data/pokemon.json"));
