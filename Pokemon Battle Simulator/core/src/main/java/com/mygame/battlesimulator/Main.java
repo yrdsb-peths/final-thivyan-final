@@ -1,9 +1,5 @@
 package com.mygame.battlesimulator;
 
-//import com.badlogic.gdx.ApplicationAdapter;
-//import com.badlogic.gdx.graphics.Texture;
-//import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-//import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -216,7 +212,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
-
+    // Draws the title screen
     private void drawTitleScreen()
     {
         batch.begin();
@@ -232,6 +228,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    // Gets input on moves selected or switch button
     private void getInput()
     {
         String[] moves = playerTeam.getCurrentPokemon().getMoves();
@@ -288,6 +285,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    // Checks which pokemon is faster, allows them to move first
     private void chooseTurn()
     {
         if (battle.checkSpeed(playerTeam.getCurrentPokemon(), oppTeam.getCurrentPokemon()))
@@ -315,6 +313,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    // Gets the move the user selected, applying damage
     private void getMove()
     {
         JsonValue moveData = movesRoot.get(userMoveName);
@@ -332,6 +331,7 @@ public class Main extends ApplicationAdapter {
         animationReset = true;
     }
 
+    // Draws the pokeballs displayed below the user and opponent's pokemon
     private void drawTeamPokeballs(boolean user)
     {
         if (user) {
@@ -374,6 +374,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    // Creates the user team based on randomly chosen pokemon
     private void createPlayerTeam()
     {
         Pokemon[] team = new Pokemon[6];
@@ -395,6 +396,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    // Creates the opponent team based on randomly chosen pokemon
     private void createOppTeam()
     {
         Pokemon[] team2 = new Pokemon[6];
@@ -416,6 +418,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    // Draws the user's Pokemon's four moves
     private void drawMoves(String[] moves, int buttonWidth, int buttonHeight, int gapX, int gapY, int startX, int startY)
     {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -437,19 +440,6 @@ public class Main extends ApplicationAdapter {
         }
 
         shapeRenderer.end();
-    }
-
-    private void drawSuperEffective(int x, int y)
-    {
-        batch.begin();
-        batch.draw(greenArrow, x - 10, y + 10);
-        batch.end();
-
-    }
-
-    private void drawNotEffective()
-    {
-
     }
 
     private void drawBackground()
@@ -520,6 +510,7 @@ public class Main extends ApplicationAdapter {
 
     }
 
+    // Displays attack text
     private void displayBattleText(boolean user)
     {
         if (!visibleBattleText.equals(battleText))
@@ -561,72 +552,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
-    private void switchPokemon()
-    {
-        Gdx.gl.glEnable(GL20.GL_BLEND);
-        shapeRenderer.setAutoShapeType(true);
-        shapeRenderer.begin();
-        shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0f, 0f, 0f, 0.9f);
-        shapeRenderer.rect(60, 10, 520, 450);
-        shapeRenderer.set(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.CLEAR_WHITE);
-        shapeRenderer.rect(60, 10, 520, 450);
-        shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-
-        batch.begin();
-        for (int i = 0; i < 6; i++)
-        {
-
-            if (playerTeam.getPokemon(i).isFainted())
-            {
-                batch.setColor(Color.BLACK);
-            }
-            batch.draw(playerIcons[i], 90, 400 - 70*i, 40, 40);
-            batch.setColor(Color.WHITE);
-            font.draw(batch, playerTeam.getPokemon(i).getName(), 140, 420 - 70*i);
-            drawHp(playerTeam.getPokemon(i), playerTeam.getPokemon(i).getCurrentHealth(), 350, 400 - 70*i);
-//                shapeRenderer.set(ShapeRenderer.ShapeType.Line);
-//                shapeRenderer.rect(85, 397 - 70*i, 470, 45);
-
-        }
-
-        font.draw(batch, "Back", 485, 450);
-
-        if (Gdx.input.justTouched())
-        {
-            mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-
-            camera.unproject(mousePosition);
-            float mouseX = mousePosition.x;
-            float mouseY = mousePosition.y;
-
-            if (mouseX >= 475 && mouseX <= 555 && mouseY >= 420 && mouseY <= 460)
-            {
-                battleState = "PLAYER";
-            }
-
-            for (int i = 0; i < 6; i++)
-            {
-                if (mouseX >= 85 && mouseX <= 555 && mouseY >= 397 - 70*i && mouseY <= 420 - 70*i)
-                {
-                    // Switches to first pokemon
-                    if (!playerTeam.getPokemon(i).isFainted())
-                    {
-                        playerTeam.switchPokemon(i);
-                        playerRenderer.dispose();
-                        playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
-                        battleState = "PLAYER";
-                    }
-                }
-            }
-        }
-
-        batch.end();
-        shapeRenderer.end();
-        Gdx.gl.glDisable(GL20.GL_BLEND);
-    }
-
+    // Displays effectiveness text
     private void displayEffectiveness(boolean user)
     {
         if (!visibleEffectiveText.equals(effectiveText))
@@ -686,6 +612,7 @@ public class Main extends ApplicationAdapter {
 
     }
 
+    // Randomly chooses a move for the opponent
     private void processOpponentTurn()
     {
         String[] moves = oppTeam.getCurrentPokemon().getMoves();
@@ -708,6 +635,7 @@ public class Main extends ApplicationAdapter {
         animationReset = true;
     }
 
+    // Checks if the opponent pokeman has fainted (Health at zero)
     private void checkOppFainted()
     {
         if (oppTeam.getCurrentPokemon().isFainted()) {
@@ -725,6 +653,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    // Checks if the user pokeman has fainted (Health at zero)
     private void checkUserFainted()
     {
         if (playerTeam.getCurrentPokemon().isFainted()) {
@@ -742,6 +671,71 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    // Creates a switch menu and allows user to select/switch into different Pokemon
+    private void switchPokemon()
+    {
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        shapeRenderer.setAutoShapeType(true);
+        shapeRenderer.begin();
+        shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0f, 0f, 0f, 0.9f);
+        shapeRenderer.rect(60, 10, 520, 450);
+        shapeRenderer.set(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.CLEAR_WHITE);
+        shapeRenderer.rect(60, 10, 520, 450);
+        shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
+
+        batch.begin();
+        for (int i = 0; i < 6; i++)
+        {
+
+            if (playerTeam.getPokemon(i).isFainted())
+            {
+                batch.setColor(Color.BLACK);
+            }
+            batch.draw(playerIcons[i], 90, 400 - 70*i, 40, 40);
+            batch.setColor(Color.WHITE);
+            font.draw(batch, playerTeam.getPokemon(i).getName(), 140, 420 - 70*i);
+            drawHp(playerTeam.getPokemon(i), playerTeam.getPokemon(i).getCurrentHealth(), 350, 400 - 70*i);
+        }
+
+        font.draw(batch, "Back", 485, 450);
+
+        if (Gdx.input.justTouched())
+        {
+            mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+
+            camera.unproject(mousePosition);
+            float mouseX = mousePosition.x;
+            float mouseY = mousePosition.y;
+
+            if (mouseX >= 475 && mouseX <= 555 && mouseY >= 420 && mouseY <= 460)
+            {
+                battleState = "PLAYER";
+            }
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (mouseX >= 85 && mouseX <= 555 && mouseY >= 397 - 70*i && mouseY <= 420 - 70*i)
+                {
+                    // Switches to first pokemon
+                    if (!playerTeam.getPokemon(i).isFainted())
+                    {
+                        playerTeam.switchPokemon(i);
+                        playerRenderer.dispose();
+                        playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
+                        battleState = "PLAYER";
+                    }
+                }
+            }
+        }
+
+        batch.end();
+        shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+    }
+
+    // Restarts to the titlescreen, creating new teams and backgrounds
     private void restartBattle()
     {
         createPlayerTeam();
