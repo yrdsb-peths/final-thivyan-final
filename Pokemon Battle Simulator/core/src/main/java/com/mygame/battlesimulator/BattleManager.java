@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
+// Handles the damage and speed of the Pokemon
 public class BattleManager {
     private JsonValue root;
     private int damage;
