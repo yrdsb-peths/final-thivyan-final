@@ -85,6 +85,8 @@ public class Main extends ApplicationAdapter {
     private Music battleMusic;
     private Music hitEffect;
 
+    private String victory;
+
     @Override
     public void create() {
         camera = new OrthographicCamera();
@@ -119,11 +121,10 @@ public class Main extends ApplicationAdapter {
         movesRoot = reader.parse(Gdx.files.internal("pokemon/data/moves.Json"));
         typesRoot = reader.parse(Gdx.files.internal("pokemon/data/types.Json"));
 
-        //
+        // gets current HP and pokeball texture
         pokeball = new Texture("ui/pokeballs.png");
         displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
         displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
-        battleState = "TITLE";
 
         hitEffect = Gdx.audio.newMusic(Gdx.files.internal("sounds/hit.mp3"));
         hitEffect.setVolume(0.8f);
@@ -139,6 +140,8 @@ public class Main extends ApplicationAdapter {
         background = new Texture ("ui/backgrounds.jpg");
         background.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         backgrounds = TextureRegion.split(background, 504, 393);
+        battleState = "TITLE";
+
     }
 
 
@@ -196,7 +199,8 @@ public class Main extends ApplicationAdapter {
         else if (battleState.equals("GAME OVER"))
         {
             batch.begin();
-            font.draw(batch, "Click to play again", 240, 250);
+            font.draw(batch, victory, 260, 250);
+            font.draw(batch, "Click to play again", 240, 200);
             batch.end();
             battleMusic.pause();
 
@@ -644,6 +648,7 @@ public class Main extends ApplicationAdapter {
                 battleState = "PLAYER";
             } else {
                 System.out.println("no more pokemon");
+                victory = "VICTORY";
                 battleState = "GAME OVER";
             }
         }
@@ -662,6 +667,7 @@ public class Main extends ApplicationAdapter {
                 battleState = "PLAYER";
             } else {
                 System.out.println("no more pokemon");
+                victory = "DEFEAT";
                 battleState = "GAME OVER";
             }
         }
