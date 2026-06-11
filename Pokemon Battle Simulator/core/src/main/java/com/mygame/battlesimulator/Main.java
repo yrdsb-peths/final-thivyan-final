@@ -31,10 +31,8 @@ public class Main extends ApplicationAdapter {
     private PokemonDatabase database;
     private PokemonRenderer playerRenderer;
     private PokemonRenderer oppRenderer;
-    private PokemonRenderer iconRenderer;
 
     // Load the textures and fonts
-    private Texture sheet;
     private Texture titleBackground;
     private Texture greenArrow;
     private Texture redArrow;
@@ -56,8 +54,6 @@ public class Main extends ApplicationAdapter {
     private JsonValue typesRoot;
     private Move userMove;
     private String userMoveName;
-    private String oppMoveName;
-    private TypeChart userType;
 
     // Display health bar
     private float displayedPlayerHp;
@@ -442,13 +438,13 @@ public class Main extends ApplicationAdapter {
         shapeRenderer.end();
     }
 
+    // Draws the battle background
     private void drawBackground()
     {
         batch.begin();
         batch.draw(backgrounds[backgroundX][backgroundY], 0, 0, 650, 500);
         batch.end();
     }
-
 
     // Displays health bars, names, levels, and types
     private void displayBattleBar()
@@ -759,6 +755,7 @@ public class Main extends ApplicationAdapter {
         battleState = "TITLE";
     }
 
+    // Draws the health bars
     private void drawHp (Pokemon pokemon, float displayedHp, float x, float y) {
         float maxWidth = 200;
         float height = 18;
@@ -778,6 +775,7 @@ public class Main extends ApplicationAdapter {
         shapeRenderer.rect(x, y, hpWidth, height);
     }
 
+    // Changes health bar colour depending on health percent
     private Color getHealthColour(float hpPercent)
     {
         if (hpPercent > 0.5)
@@ -795,6 +793,7 @@ public class Main extends ApplicationAdapter {
 
     }
 
+    // Returns colour code for based on the type
     private String findColour(String type)
     {
         if (type.equals("Normal")){
@@ -881,7 +880,6 @@ public class Main extends ApplicationAdapter {
         oppRenderer.dispose();
         shapeRenderer.dispose();
         batch.dispose();
-        //sheet.dispose();
     }
 
 }
