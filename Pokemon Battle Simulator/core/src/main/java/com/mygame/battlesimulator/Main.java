@@ -503,7 +503,7 @@ public class Main extends ApplicationAdapter {
         // draw pokeballs
         drawTeamPokeballs(true);
         drawTeamPokeballs(false);
-        
+
         playerRenderer.draw(batch, 110, 80, true);
         font.draw(batch, playerTeam.getCurrentPokemon().getName(), 400, 250);
         font.draw(batch,  "   Lv. 100", 500, 250);
