@@ -23,6 +23,7 @@ public class TypeChart {
     private float steel;
     private float fairy;
 
+    // Constructs a move's type and how effective it is against each other type
     public TypeChart(String name, JsonValue data)
     {
         this.name = name;
@@ -45,6 +46,8 @@ public class TypeChart {
         this.steel = data.getFloat("Steel", 1);
         this.fairy = data.getFloat("Fairy", 1);
     }
+
+    // Getter methods to get the effectiveness of a move's type against each Pokemon type
 
     public float getNormal() {
         return normal;

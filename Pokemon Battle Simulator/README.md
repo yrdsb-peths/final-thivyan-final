@@ -18,6 +18,8 @@ Code
 - Overall aid on how to use LibGDX with IntelliJIdea: ChatGPT
 
 - Pokemon: Nintendo, Game Freak, Creature Inc.
+- Pokemon Music: Pokemon Diamond and Pearl
+- Damage sound effect: Pokemon Black 2 White 2
 - Pokemon Sprite Sheets: Pokemon Database (https://pokemondb.net/sprites/)
 - Pokemon Type Images: Bulbagarden (https://archives.bulbagarden.net/w/index.php?title=Category:Type_icons&fileuntil=PoisonIC+SMD.png#mw-category-media)
 - Pokemon Font: Fontstruct (https://fontstruct.com/fontstructions/show/1027411/pok_mon_black_white_black_2_and_white_2_tex)

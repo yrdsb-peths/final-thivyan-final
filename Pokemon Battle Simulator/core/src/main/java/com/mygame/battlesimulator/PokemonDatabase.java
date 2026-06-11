@@ -16,6 +16,7 @@ public class PokemonDatabase {
     private Array<String> megaPokemon;
     private Array<String> normalPokemon;
 
+    // Constructs arrays for the pokemon to be sorted in
     public PokemonDatabase() {
         allPokemon = new Array<>();
         legendaryPokemon = new Array<>();
@@ -24,6 +25,7 @@ public class PokemonDatabase {
 
         loadPokemon();
     }
+
 
     private void loadPokemon() {
         JsonReader reader = new JsonReader();
