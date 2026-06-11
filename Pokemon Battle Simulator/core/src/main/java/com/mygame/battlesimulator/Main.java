@@ -42,6 +42,9 @@ public class Main extends ApplicationAdapter {
     private Texture titleBackground;
     private Texture greenArrow;
     private Texture redArrow;
+    private Texture pokeball;
+    private Texture[] playerIcons;
+    private Texture[] oppIcons;
     private Animation<TextureRegion> animation;
     private float stateTime;
     private BitmapFont font;
@@ -125,6 +128,7 @@ public class Main extends ApplicationAdapter {
         typesRoot = reader.parse(Gdx.files.internal("pokemon/data/types.Json"));
 
         //
+        pokeball = new Texture("ui/pokeballs.png");
         displayedPlayerHp = playerTeam.getCurrentPokemon().getCurrentHealth();
         displayedOppHp = oppTeam.getCurrentPokemon().getCurrentHealth();
         battleState = "TITLE";
@@ -328,43 +332,43 @@ public class Main extends ApplicationAdapter {
         animationReset = true;
     }
 
-    private void megaEvolve()
-    {
-        Pokemon current = playerTeam.getCurrentPokemon();
-
-        if (megaUsed)
-        {
-            return;
-        }
-
-        if (!current.canMega())
-        {
-            return;
-        }
-
-        //Pokemon mega = database.get
-    }
-
     private void drawTeamPokeballs(boolean user)
     {
         if (user) {
             for (int i = 0; i < 6; i++) {
-                Texture pokeball = new Texture("ui/pokeballs.png");
                 if (playerTeam.getPokemon(i).isFainted()) {
                     batch.setColor(Color.BLACK);
                 }
-                batch.draw(pokeball, 400 + 25 * i, 150, 20, 20);
+
+                if (playerTeam.getPokemon(i) == playerTeam.getCurrentPokemon())
+                {
+                    batch.draw(playerIcons[i], 398 + 25 * i, 148, 27, 27);
+                }
+                else
+                {
+                    batch.draw(pokeball, 400 + 25 * i, 150, 15, 15);
+                }
+
                 batch.setColor(Color.WHITE);
+
             }
         }
         else
         {
             for (int i = 0; i < 6; i++) {
-                Texture pokeball = new Texture("ui/pokeballs.png");
                 if (oppTeam.getPokemon(i).isFainted()) {
                     batch.setColor(Color.BLACK);
                 }
-                batch.draw(pokeball, 100 + 25 * i, 350, 20, 20);
+
+                if (oppTeam.getPokemon(i) == oppTeam.getCurrentPokemon())
+                {
+                    batch.draw(oppIcons[i], 78 + 25 * i, 348, 27, 27);
+                }
+                else
+                {
+                    batch.draw(pokeball, 80 + 25 * i, 350, 15, 15);
+                }
+
                 batch.setColor(Color.WHITE);
             }
         }
@@ -383,6 +387,12 @@ public class Main extends ApplicationAdapter {
         }
 
         playerTeam = new Team(team);
+        playerIcons = new Texture[6];
+
+        for (int i = 0; i< 6; i++)
+        {
+            playerIcons[i] = new Texture(playerTeam.getPokemon(i).getIcon());
+        }
     }
 
     private void createOppTeam()
@@ -398,6 +408,12 @@ public class Main extends ApplicationAdapter {
         }
 
         oppTeam = new Team(team2);
+        oppIcons = new Texture[6];
+
+        for (int i = 0; i< 6; i++)
+        {
+            oppIcons[i] = new Texture(oppTeam.getPokemon(i).getIcon());
+        }
     }
 
     private void drawMoves(String[] moves, int buttonWidth, int buttonHeight, int gapX, int gapY, int startX, int startY)
@@ -487,7 +503,7 @@ public class Main extends ApplicationAdapter {
         // draw pokeballs
         drawTeamPokeballs(true);
         drawTeamPokeballs(false);
-
+        
         playerRenderer.draw(batch, 110, 80, true);
         font.draw(batch, playerTeam.getCurrentPokemon().getName(), 400, 250);
         font.draw(batch,  "   Lv. 100", 500, 250);
@@ -561,12 +577,12 @@ public class Main extends ApplicationAdapter {
         batch.begin();
         for (int i = 0; i < 6; i++)
         {
-            Texture icon = new Texture(playerTeam.getPokemon(i).getIcon());
+
             if (playerTeam.getPokemon(i).isFainted())
             {
                 batch.setColor(Color.BLACK);
             }
-            batch.draw(icon, 90, 400 - 70*i, 40, 40);
+            batch.draw(playerIcons[i], 90, 400 - 70*i, 40, 40);
             batch.setColor(Color.WHITE);
             font.draw(batch, playerTeam.getPokemon(i).getName(), 140, 420 - 70*i);
             drawHp(playerTeam.getPokemon(i), playerTeam.getPokemon(i).getCurrentHealth(), 350, 400 - 70*i);
@@ -863,6 +879,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void dispose() {
+        pokeball.dispose();
         background.dispose();
         hitEffect.dispose();
         battleMusic.dispose();
