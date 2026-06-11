@@ -3,6 +3,7 @@ package com.mygame.battlesimulator;
 
 import com.badlogic.gdx.utils.JsonValue;
 
+// Handles the information associated with each move
 public class Move {
     private String name;
     private String type;
@@ -11,7 +12,7 @@ public class Move {
     private int accuracy;
     private int points;
 
-
+    // Constructs a move object with its own stats
     public Move(String name, JsonValue data)
     {
         this.name = name;
