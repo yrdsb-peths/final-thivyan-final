@@ -61,7 +61,7 @@ public class PokemonDatabase {
 
     public Pokemon getMegaPokemon(String id)
     {
-        return new Pokemon(megaRoot.get(id))
+        return new Pokemon(megaRoot.get(id));
     }
 
     public Pokemon getRandomPokemon()

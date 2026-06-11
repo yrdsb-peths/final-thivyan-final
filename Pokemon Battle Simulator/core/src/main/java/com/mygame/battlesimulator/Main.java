@@ -39,6 +39,9 @@ public class Main extends ApplicationAdapter {
 
     // Load the textures and fonts
     private Texture sheet;
+    private Texture titleBackground;
+    private Texture greenArrow;
+    private Texture redArrow;
     private Animation<TextureRegion> animation;
     private float stateTime;
     private BitmapFont font;
@@ -112,6 +115,8 @@ public class Main extends ApplicationAdapter {
         playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
         oppRenderer = new PokemonRenderer(oppTeam.getCurrentPokemon(), false);
         shapeRenderer = new ShapeRenderer();
+        //Texture greenArrow = new Texture("ui/greenArrows.png");
+        //Texture redArrow = new Texture("ui/redArrow.png");
 
         // Gets the Pokemon/moves/types information from the respective JSON files
         JsonReader reader = new JsonReader();
@@ -129,15 +134,10 @@ public class Main extends ApplicationAdapter {
 
         battleMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/champion.mp3"));
         battleMusic.setLooping(true);
-        battleMusic.setVolume(0.4f);
+        battleMusic.setVolume(0.2f);
         battleMusic.play();
 
-//        background = new Texture ("ui/backgrounds.png");
-//        TextureRegion[][] backgrounds = TextureRegion.split(background, 126, 99);
-//
-//        batch.begin();
-//        batch.draw(background, 100, 100, 400, 400);
-//        batch.end();
+        titleBackground = new Texture(Gdx.files.internal("ui/titleBackground.png"));
         backgroundX = MathUtils.random(0,2);
         backgroundY = MathUtils.random(0,2);
         background = new Texture ("ui/backgrounds.jpg");
@@ -212,12 +212,14 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+
     private void drawTitleScreen()
     {
         batch.begin();
-        font.draw(batch, "Pokemon Battle", 240, 280);
-        font.draw(batch, "Simulator", 277, 250);
-        font.draw(batch, "Click anywhere to start", 197, 100);
+        batch.draw(titleBackground, 0, 0, 650, 500);
+        font.draw(batch, "Pokemon Battle", 80, 380);
+        font.draw(batch, "Simulator", 113, 350);
+        font.draw(batch, "Click anywhere to start", 33, 280);
         batch.end();
 
         if (Gdx.input.justTouched())
@@ -241,8 +243,6 @@ public class Main extends ApplicationAdapter {
         drawMoves(moves, buttonWidth, buttonHeight, gapX, gapY, startX, startY);
 
         batch.begin();
-
-        drawTeamIcons();
 
         for (int i = 0; i < 4; i++)
         {
@@ -342,20 +342,31 @@ public class Main extends ApplicationAdapter {
             return;
         }
 
-        Pokemon mega = database.get
+        //Pokemon mega = database.get
     }
 
-    private void drawTeamIcons()
+    private void drawTeamPokeballs(boolean user)
     {
-        for (int i = 0; i < 6; i++)
-        {
-            Texture icon = new Texture(playerTeam.getPokemon(i).getIcon());
-            if (playerTeam.getPokemon(i).isFainted())
-            {
-                batch.setColor(Color.BLACK);
+        if (user) {
+            for (int i = 0; i < 6; i++) {
+                Texture pokeball = new Texture("ui/pokeballs.png");
+                if (playerTeam.getPokemon(i).isFainted()) {
+                    batch.setColor(Color.BLACK);
+                }
+                batch.draw(pokeball, 400 + 25 * i, 150, 20, 20);
+                batch.setColor(Color.WHITE);
             }
-            batch.draw(icon, 0, 370 - 35*i, 40, 40);
-            batch.setColor(Color.WHITE);
+        }
+        else
+        {
+            for (int i = 0; i < 6; i++) {
+                Texture pokeball = new Texture("ui/pokeballs.png");
+                if (oppTeam.getPokemon(i).isFainted()) {
+                    batch.setColor(Color.BLACK);
+                }
+                batch.draw(pokeball, 100 + 25 * i, 350, 20, 20);
+                batch.setColor(Color.WHITE);
+            }
         }
     }
 
@@ -403,12 +414,26 @@ public class Main extends ApplicationAdapter {
             String moveType = movesData.getString("type");
 
             shapeRenderer.setColor(Color.valueOf(findColour(moveType)));
-
-
             shapeRenderer.rect(x, y, buttonWidth, buttonHeight);
+            //float effectiveness = battle.getEffectiveness(playerTeam.getCurrentPokemon().getType1(), moveType) * battle.getEffectiveness(playerTeam.getCurrentPokemon().getType2(), moveType);
+
+            //if ()
         }
 
         shapeRenderer.end();
+    }
+
+    private void drawSuperEffective(int x, int y)
+    {
+        batch.begin();
+        batch.draw(greenArrow, x - 10, y + 10);
+        batch.end();
+
+    }
+
+    private void drawNotEffective()
+    {
+
     }
 
     private void drawBackground()
@@ -429,6 +454,20 @@ public class Main extends ApplicationAdapter {
         playerRenderer.update(delta);
         oppRenderer.update(delta);
 
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+        // Creates black bar
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        shapeRenderer.setColor(0f ,0f ,0f, 0.5f);
+        shapeRenderer.rect(0, 30, Gdx.graphics.getWidth(), 115);
+
+        // health bar
+        drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 400, 200);
+        drawHp(oppTeam.getCurrentPokemon(), displayedOppHp, 80, 400);
+
+        shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+
         batch.begin();
 
         Texture playerType1 = new Texture("ui/" + playerTeam.getCurrentPokemon().getType1() + ".png");
@@ -445,6 +484,10 @@ public class Main extends ApplicationAdapter {
         batch.draw(oppType1, 80, 374, 59, 20);
         batch.draw(oppType2, 140, 374, 59, 20);
 
+        // draw pokeballs
+        drawTeamPokeballs(true);
+        drawTeamPokeballs(false);
+
         playerRenderer.draw(batch, 110, 80, true);
         font.draw(batch, playerTeam.getCurrentPokemon().getName(), 400, 250);
         font.draw(batch,  "   Lv. 100", 500, 250);
@@ -458,19 +501,7 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        // Creates black bar
-        Gdx.gl.glEnable(GL20.GL_BLEND);
-        shapeRenderer.setColor(0f ,0f ,0f, 0.5f);
-        shapeRenderer.rect(0, 30, Gdx.graphics.getWidth(), 115);
-
-        // health bar
-        drawHp(playerTeam.getCurrentPokemon(), displayedPlayerHp, 400, 200);
-        drawHp(oppTeam.getCurrentPokemon(), displayedOppHp, 80, 400);
-
-        shapeRenderer.end();
-        Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
     private void displayBattleText(boolean user)
@@ -697,7 +728,6 @@ public class Main extends ApplicationAdapter {
 
     private void restartBattle()
     {
-        dispose();
         createPlayerTeam();
         createOppTeam();
 
@@ -715,7 +745,8 @@ public class Main extends ApplicationAdapter {
         // Creates new background
         backgroundX = MathUtils.random(0,2);
         backgroundY = MathUtils.random(0,2);
-        battleState = "PLAYER";
+
+        battleState = "TITLE";
     }
 
     private void drawHp (Pokemon pokemon, float displayedHp, float x, float y) {
