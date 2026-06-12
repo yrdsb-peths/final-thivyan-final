@@ -1,12 +1,9 @@
 {
   "charizard": {
     "name": "Charizard",
-
     "type1": "Fire",
     "type2": "Flying",
-
     "legendary": false,
-
     "stats": {
       "hp": 360,
       "attack": 293,
@@ -15,38 +12,32 @@
       "specialDefense": 295,
       "speed": 328
     },
-
-    "moves": ["Flamethrower", "Air Slash", "Dragon Claw", "Earthquake"],
-
+    "moves": [
+      "Flamethrower",
+      "Air Slash",
+      "Dragon Claw",
+      "Earthquake"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/charizard/charizardBack.png",
       "oppSprite": "pokemon/sprites/charizard/charizardFront.png",
       "icon": "pokemon/sprites/charizard/charizard.png",
-
       "userWidth": 98,
       "userHeight": 83,
-
       "oppWidth": 89,
       "oppHeight": 91,
-
       "userFrames": 143,
       "oppFrames": 143,
-
       "scale": 2.3
     },
-
     "canMegaEvolve": true,
     "megaId": "mega_charizard_x"
   },
-
   "mewtwo": {
     "name": "Mewtwo",
-
     "type1": "Psychic",
     "type2": "",
-
     "legendary": true,
-
     "stats": {
       "hp": 416,
       "attack": 350,
@@ -55,38 +46,32 @@
       "specialDefense": 306,
       "speed": 394
     },
-
-    "moves": ["Psychic", "Shadow Ball", "Ice Beam", "Aura Sphere"],
-
+    "moves": [
+      "Psychic",
+      "Shadow Ball",
+      "Ice Beam",
+      "Aura Sphere"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/mewtwo/mewtwoBack.png",
       "oppSprite": "pokemon/sprites/mewtwo/mewtwoFront.png",
       "icon": "pokemon/sprites/mewtwo/mewtwo.png",
-
       "userWidth": 95,
       "userHeight": 70,
-
       "oppWidth": 90,
       "oppHeight": 69,
-
       "userFrames": 125,
       "oppFrames": 125,
-
       "scale": 2.4
     },
-
     "canMegaEvolve": true,
     "megaId": "mega_mewtwo_x"
   },
-
   "reshiram": {
     "name": "Reshiram",
-
     "type1": "Dragon",
     "type2": "Fire",
-
     "legendary": true,
-
     "stats": {
       "hp": 404,
       "attack": 372,
@@ -95,37 +80,31 @@
       "specialDefense": 328,
       "speed": 306
     },
-
-    "moves": ["Flamethrower", "Dragon Claw", "Air Slash", "Draco Meteor"],
-
+    "moves": [
+      "Flamethrower",
+      "Dragon Claw",
+      "Air Slash",
+      "Draco Meteor"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/reshiram/reshiramBack.png",
       "oppSprite": "pokemon/sprites/reshiram/reshiramFront.png",
       "icon": "pokemon/sprites/reshiram/reshiram.png",
-
       "userWidth": 100,
       "userHeight": 89,
-
       "oppWidth": 108,
       "oppHeight": 83,
-
       "userFrames": 225,
       "oppFrames": 225,
-
       "scale": 2.7
     },
-
     "canMegaEvolve": false
   },
-
   "zekrom": {
     "name": "Zekrom",
-
     "type1": "Dragon",
     "type2": "Electric",
-
     "legendary": true,
-
     "stats": {
       "hp": 404,
       "attack": 438,
@@ -134,37 +113,31 @@
       "specialDefense": 328,
       "speed": 306
     },
-
-    "moves": ["Dragon Claw", "Thunderbolt", "Crunch", "Earthquake"],
-
+    "moves": [
+      "Dragon Claw",
+      "Thunderbolt",
+      "Crunch",
+      "Earthquake"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/zekrom/zekromBack.png",
       "oppSprite": "pokemon/sprites/zekrom/zekromFront.png",
       "icon": "pokemon/sprites/zekrom/zekrom.png",
-
       "userWidth": 107,
       "userHeight": 91,
-
       "oppWidth": 102,
       "oppHeight": 91,
-
       "userFrames": 191,
       "oppFrames": 191,
-
       "scale": 2.7
     },
-
     "canMegaEvolve": false
   },
-
   "darkrai": {
     "name": "Darkrai",
-
     "type1": "Dark",
     "type2": "",
-
     "legendary": true,
-
     "stats": {
       "hp": 344,
       "attack": 306,
@@ -173,37 +146,31 @@
       "specialDefense": 306,
       "speed": 383
     },
-
-    "moves": ["Dark Pulse", "Shadow Ball", "Psychic", "Ice Beam"],
-
+    "moves": [
+      "Dark Pulse",
+      "Shadow Ball",
+      "Psychic",
+      "Ice Beam"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/darkrai/darkraiBack.png",
       "oppSprite": "pokemon/sprites/darkrai/darkraiFront.png",
       "icon": "pokemon/sprites/darkrai/darkrai.png",
-
       "userWidth": 91,
       "userHeight": 87,
-
       "oppWidth": 96,
       "oppHeight": 86,
-
       "userFrames": 143,
       "oppFrames": 143,
-
       "scale": 2.2
     },
-
     "canMegaEvolve": false
   },
-
   "lucario": {
     "name": "Lucario",
-
     "type1": "Fighting",
     "type2": "Steel",
-
     "legendary": false,
-
     "stats": {
       "hp": 344,
       "attack": 350,
@@ -212,38 +179,32 @@
       "specialDefense": 262,
       "speed": 306
     },
-
-    "moves": ["Aura Sphere", "Close Combat", "Flash Cannon", "Dark Pulse"],
-
+    "moves": [
+      "Aura Sphere",
+      "Close Combat",
+      "Flash Cannon",
+      "Dark Pulse"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/lucario/lucarioBack.png",
       "oppSprite": "pokemon/sprites/lucario/lucarioFront.png",
       "icon": "pokemon/sprites/lucario/lucario.png",
-
       "userWidth": 49,
       "userHeight": 65,
-
       "oppWidth": 48,
       "oppHeight": 63,
-
       "userFrames": 143,
       "oppFrames": 143,
-
       "scale": 2.0
     },
-
     "canMegaEvolve": true,
     "megaId": "mega_lucario"
   },
-
   "electivire": {
     "name": "Electivire",
-
     "type1": "Electric",
     "type2": "",
-
     "legendary": false,
-
     "stats": {
       "hp": 354,
       "attack": 379,
@@ -252,37 +213,31 @@
       "specialDefense": 295,
       "speed": 289
     },
-
-    "moves": ["Thunderbolt", "Ice Punch", "Earthquake", "Brick Break"],
-
+    "moves": [
+      "Thunderbolt",
+      "Ice Punch",
+      "Earthquake",
+      "Brick Break"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/electivire/electivireBack.png",
       "oppSprite": "pokemon/sprites/electivire/electivireFront.png",
       "icon": "pokemon/sprites/electivire/electivire.png",
-
       "userWidth": 102,
       "userHeight": 85,
-
       "oppWidth": 96,
       "oppHeight": 85,
-
       "userFrames": 103,
       "oppFrames": 103,
-
       "scale": 2.2
     },
-
     "canMegaEvolve": false
   },
-
   "scizor": {
     "name": "Scizor",
-
     "type1": "Bug",
     "type2": "Steel",
-
     "legendary": false,
-
     "stats": {
       "hp": 344,
       "attack": 394,
@@ -291,38 +246,32 @@
       "specialDefense": 284,
       "speed": 251
     },
-
-    "moves": ["X-Scissor", "Bullet Punch", "Brick Break", "Iron Head"],
-
+    "moves": [
+      "X-Scissor",
+      "Bullet Punch",
+      "Brick Break",
+      "Iron Head"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/scizor/scizorBack.png",
       "oppSprite": "pokemon/sprites/scizor/scizorFront.png",
       "icon": "pokemon/sprites/scizor/scizor.png",
-
       "userWidth": 68,
       "userHeight": 75,
-
       "oppWidth": 75,
       "oppHeight": 73,
-
       "userFrames": 105,
       "oppFrames": 105,
-
       "scale": 2.1
     },
-
     "canMegaEvolve": true,
     "megaId": "mega_scizor"
   },
-
   "haxorus": {
     "name": "Haxorus",
-
     "type1": "Dragon",
     "type2": "",
-
     "legendary": false,
-
     "stats": {
       "hp": 352,
       "attack": 432,
@@ -331,37 +280,31 @@
       "specialDefense": 262,
       "speed": 317
     },
-
-    "moves": ["Dragon Claw", "Earthquake", "Brick Break", "X-Scissor"],
-
+    "moves": [
+      "Dragon Claw",
+      "Earthquake",
+      "Brick Break",
+      "X-Scissor"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/haxorus/haxorusBack.png",
       "oppSprite": "pokemon/sprites/haxorus/haxorusFront.png",
       "icon": "pokemon/sprites/haxorus/haxorus.png",
-
       "userWidth": 91,
       "userHeight": 87,
-
       "oppWidth": 70,
       "oppHeight": 84,
-
       "userFrames": 185,
       "oppFrames": 182,
-
       "scale": 2.3
     },
-
     "canMegaEvolve": false
   },
-
   "hydreigon": {
     "name": "Hydreigon",
-
     "type1": "Dark",
     "type2": "Dragon",
-
     "legendary": false,
-
     "stats": {
       "hp": 386,
       "attack": 339,
@@ -370,40 +313,31 @@
       "specialDefense": 306,
       "speed": 324
     },
-
-    "moves": ["Dark Pulse", "Dragon Pulse", "Flamethrower", "Air Slash"],
-
+    "moves": [
+      "Dark Pulse",
+      "Dragon Pulse",
+      "Flamethrower",
+      "Air Slash"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/hydreigon/hydreigonBack.png",
       "oppSprite": "pokemon/sprites/hydreigon/hydreigonFront.png",
       "icon": "pokemon/sprites/hydreigon/hydreigon.png",
-
       "userWidth": 84,
       "userHeight": 111,
-
       "oppWidth": 91,
       "oppHeight": 107,
-
       "userFrames": 75,
       "oppFrames": 75,
-
       "scale": 2.4
     },
-
     "canMegaEvolve": false
   },
-
   "metagross": {
     "name": "Metagross",
-
-
     "type1": "Steel",
     "type2": "Psychic",
-
-
     "legendary": false,
-
-
     "stats": {
       "hp": 364,
       "attack": 405,
@@ -412,48 +346,31 @@
       "specialDefense": 306,
       "speed": 262
     },
-
-
-    "moves": ["Meteor Mash", "Zen Headbutt", "Earthquake", "Bullet Punch"],
-
-
+    "moves": [
+      "Meteor Mash",
+      "Zen Headbutt",
+      "Earthquake",
+      "Bullet Punch"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/metagross/metagrossBack.png",
       "oppSprite": "pokemon/sprites/metagross/metagrossFront.png",
       "icon": "pokemon/sprites/metagross/metagross.png",
-
-
       "userWidth": 82,
       "userHeight": 55,
-
-
       "oppWidth": 83,
       "oppHeight": 57,
-
-
       "userFrames": 103,
       "oppFrames": 105,
-
-
       "scale": 2.4
     },
-
-
     "canMegaEvolve": false
   },
-
-
   "kyurem": {
     "name": "Kyurem",
-
-
     "type1": "Dragon",
     "type2": "Ice",
-
-
     "legendary": true,
-
-
     "stats": {
       "hp": 416,
       "attack": 394,
@@ -462,48 +379,31 @@
       "specialDefense": 306,
       "speed": 289
     },
-
-
-    "moves": ["Draco Meteor", "Dragon Claw", "Ice Beam", "Earth Power"],
-
-
+    "moves": [
+      "Draco Meteor",
+      "Dragon Claw",
+      "Ice Beam",
+      "Earth Power"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/kyurem/kyuremBack.png",
       "oppSprite": "pokemon/sprites/kyurem/kyuremFront.png",
       "icon": "pokemon/sprites/kyurem/kyurem.png",
-
-
       "userWidth": 80,
       "userHeight": 71,
-
-
       "oppWidth": 99,
       "oppHeight": 76,
-
-
       "userFrames": 113,
       "oppFrames": 113,
-
-
       "scale": 2.6
     },
-
-
     "canMegaEvolve": false
   },
-
-
   "skarmory": {
     "name": "Skarmory",
-
-
     "type1": "Steel",
     "type2": "Flying",
-
-
     "legendary": false,
-
-
     "stats": {
       "hp": 334,
       "attack": 262,
@@ -512,48 +412,31 @@
       "specialDefense": 262,
       "speed": 262
     },
-
-
-    "moves": ["Brave Bird", "Steel Wing", "Iron Head", "Aerial Ace"],
-
-
+    "moves": [
+      "Brave Bird",
+      "Steel Wing",
+      "Iron Head",
+      "Aerial Ace"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/skarmory/skarmoryBack.png",
       "oppSprite": "pokemon/sprites/skarmory/skarmoryFront.png",
       "icon": "pokemon/sprites/skarmory/skarmory.png",
-
-
       "userWidth": 85,
       "userHeight": 68,
-
-
       "oppWidth": 70,
       "oppHeight": 70,
-
-
       "userFrames": 112,
       "oppFrames": 96,
-
-
       "scale": 2.1
     },
-
-
     "canMegaEvolve": false
   },
-
-
   "lapras": {
     "name": "Lapras",
-
-
     "type1": "Water",
     "type2": "Ice",
-
-
     "legendary": false,
-
-
     "stats": {
       "hp": 464,
       "attack": 295,
@@ -562,83 +445,125 @@
       "specialDefense": 350,
       "speed": 240
     },
-
-
-    "moves": ["Surf", "Ice Beam", "Thunderbolt", "Psychic"],
-
-
+    "moves": [
+      "Surf",
+      "Ice Beam",
+      "Thunderbolt",
+      "Psychic"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/lapras/laprasBack.png",
       "oppSprite": "pokemon/sprites/lapras/laprasFront.png",
       "icon": "pokemon/sprites/lapras/lapras.png",
-
-
       "userWidth": 76,
       "userHeight": 71,
-
-
       "oppWidth": 68,
       "oppHeight": 71,
-
-
       "userFrames": 65,
       "oppFrames": 65,
-
-
       "scale": 2.5
     },
-
-
     "canMegaEvolve": false
   },
-
   "ninetales": {
     "name": "Ninetales",
-
-
     "type1": "Fire",
     "type2": "",
-
-
     "legendary": false,
-
-
     "stats": {
-      "hp": 350,
+      "hp": 370,
       "attack": 251,
       "defense": 273,
       "specialAttack": 295,
       "specialDefense": 328,
       "speed": 328
     },
-
-
-    "moves": ["Flamethrower", "Fire Blast", "Dark Pulse", "Energy Ball"],
-
-
+    "moves": [
+      "Flamethrower",
+      "Fire Blast",
+      "Dark Pulse",
+      "Energy Ball"
+    ],
     "animation": {
       "userSprite": "pokemon/sprites/ninetales/ninetalesBack.png",
       "oppSprite": "pokemon/sprites/ninetales/ninetalesFront.png",
       "icon": "pokemon/sprites/ninetales/ninetales.png",
-
-
       "userWidth": 76,
       "userHeight": 64,
-
-
       "oppWidth": 76,
       "oppHeight": 73,
-
-
       "userFrames": 107,
       "oppFrames": 53,
-
-
       "scale": 2.0
     },
-
-
     "canMegaEvolve": false
+  },
+  "blastoise": {
+    "name": "Blastoise",
+    "type1": "Water",
+    "type2": "",
+    "legendary": false,
+    "stats": {
+      "hp": 392,
+      "attack": 207,
+      "defense": 229,
+      "specialAttack": 295,
+      "specialDefense": 251,
+      "speed": 179
+    },
+    "moves": [
+      "Surf",
+      "Ice Beam",
+      "Hydro Pump",
+      "Aura Sphere"
+    ],
+    "animation": {
+      "userSprite": "pokemon/sprites/blastoise/blastoiseBack.png",
+      "oppSprite": "pokemon/sprites/blastoise/blastoiseFront.png",
+      "icon": "pokemon/sprites/blastoise/blastoise.png",
+      "userWidth": 66,
+      "userHeight": 66,
+      "oppWidth": 69,
+      "oppHeight": 65,
+      "userFrames": 244,
+      "oppFrames": 244,
+      "scale": 2.0
+    },
+    "canMegaEvolve": true
+  },
+
+  "venusaur": {
+    "name": "Venusaur",
+    "type1": "Grass",
+    "type2": "Poison",
+    "legendary": false,
+    "stats": {
+      "hp": 394,
+      "attack": 207,
+      "defense": 209,
+      "specialAttack": 328,
+      "specialDefense": 328,
+      "speed": 196
+    },
+    "moves": [
+      "Energy Ball",
+      "Sludge Bomb",
+      "Solar Beam",
+      "Earth Power"
+    ],
+    "animation": {
+      "userSprite": "pokemon/sprites/venusaur/venusaurBack.png",
+      "oppSprite": "pokemon/sprites/venusaur/venusaurFront.png",
+      "icon": "pokemon/sprites/venusaur/venusaur.png",
+      "userWidth": 89,
+      "userHeight": 63,
+      "oppWidth": 86,
+      "oppHeight": 71,
+      "userFrames": 167,
+      "oppFrames": 167,
+      "scale": 2.0
+    },
+    "canMegaEvolve": true
   }
 }
 
