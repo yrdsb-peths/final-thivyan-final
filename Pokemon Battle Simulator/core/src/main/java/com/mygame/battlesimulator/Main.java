@@ -198,9 +198,10 @@ public class Main extends ApplicationAdapter {
         }
         else if (battleState.equals("GAME OVER"))
         {
+            System.out.println("game over scene");
             batch.begin();
-            font.draw(batch, victory, 260, 250);
-            font.draw(batch, "Click to play again", 240, 200);
+            font.draw(batch, victory, 280, 280);
+            font.draw(batch, "Click to play again", 233, 200);
             batch.end();
             battleMusic.pause();
 
@@ -596,16 +597,19 @@ public class Main extends ApplicationAdapter {
                 checkUserFainted();
                 checkOppFainted();
 
-                firstTurn = true;
-                playerMoveDone = true;
-                oppMoveDone = true;
+                if (!battleState.equals("GAME OVER"))
+                {
+                    firstTurn = true;
+                    playerMoveDone = true;
+                    oppMoveDone = true;
 
-                visibleBattleText = "";
-                visibleEffectiveText = "";
-                lettersShown = 0;
-                typingTimer = 0f;
+                    visibleBattleText = "";
+                    visibleEffectiveText = "";
+                    lettersShown = 0;
+                    typingTimer = 0f;
 
-                battleState = "PLAYER";
+                    battleState = "PLAYER";
+                }
             }
         }
 
@@ -630,8 +634,6 @@ public class Main extends ApplicationAdapter {
         visibleEffectiveText = "";
         lettersShown = 0;
         typingTimer = 0f;
-        //battleState = "SPEED";
-        //firstTurn = true;
         animationReset = true;
     }
 
@@ -666,7 +668,7 @@ public class Main extends ApplicationAdapter {
                 playerRenderer = new PokemonRenderer(playerTeam.getCurrentPokemon(), true);
                 battleState = "PLAYER";
             } else {
-                System.out.println("no more pokemon");
+                System.out.println("no more user pokemon");
                 victory = "DEFEAT";
                 battleState = "GAME OVER";
             }
